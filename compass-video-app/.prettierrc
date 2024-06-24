@@ -1,0 +1,13 @@
+{
+    "printWidth": 80,
+    "tabWidth": 2,
+    "jsxSingleQuote": true,
+    "semi": true,
+    "htmlWhitespaceSensitivity": "strict",
+    "plugins": ["prettier-plugin-organize-imports", "prettier-plugin-tailwindcss"],
+    "tailwindConfig": "./tailwind.config.js",
+    "tailwindPreserveWhitespace": false,
+    "tailwindPreserveDuplicates": false,
+    "tailwindFunctions": ["tw"]
+
+}

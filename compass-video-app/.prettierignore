@@ -1,0 +1,50 @@
+# Diretórios de build/output
+dist/
+build/
+out/
+
+# Dependências do Node.js
+node_modules/
+
+# Logs e arquivos temporários
+*.log
+*.tmp
+
+# Configurações de ferramentas
+.vscode/
+.idea/
+.DS_Store
+
+# Arquivos de configuração do ESLint
+.eslintrc.js
+.eslintrc.cjs
+.eslintrc.json
+.eslintrc.yaml
+.eslintrc.yml
+
+# Arquivos de configuração do TypeScript
+tsconfig.json
+tsconfig.node.json
+
+# Outros arquivos e diretórios específicos do projeto que não precisam de formatação
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# Prettier configuration file (itself)
+.prettierignore
+.prettierrc
+.prettierrc.json
+.prettierrc.js
+.prettierrc.yaml
+.prettierrc.yml
+.prettierrc.toml
+
+# Ignoring certain JSON files
+*.min.json
+
+# Ignoring specific folders
+public/
+coverage/
