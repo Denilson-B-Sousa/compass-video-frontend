@@ -43,6 +43,7 @@ export default {
           'link': '#67BDFF',
           'hover-button-outline': '#000000/10',
           'border': '#FFFFFF/12',
+          'footer': '#090B13',
         },
          
       },
