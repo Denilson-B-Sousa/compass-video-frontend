@@ -14,7 +14,7 @@ export default {
           '400': '#0063E5',
           '500': '#00386C',
           'secondary': '#FFFFFF',
-          'accent': '#02E7F5/200'
+          'accent': '#02E7F5'
         },
 
         neutral: {
@@ -44,6 +44,7 @@ export default {
           'hover-button-outline': '#000000/10',
           'border': '#FFFFFF/12',
           'footer': '#090B13',
+          'header': '#131313'
         },
          
       },

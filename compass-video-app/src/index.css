@@ -5,3 +5,11 @@
 .footer-text{
     @apply font-lato text-white text-center;
 }
+
+.header-item{
+    @apply font-worksans flex gap-2 text-white items-center text-sm cursor-pointer;
+}
+
+.active-link{
+    @apply text-primary-accent;
+}
