@@ -1,6 +1,10 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import React from 'react';
 import {Login} from 'Components/Login';
+=======
+import { Header } from "@components/Header/Header";
+
+function App() {
 
 const App: React.FC = () => {
   return (
@@ -9,6 +13,12 @@ const App: React.FC = () => {
         <Route path="/" element={<Login/>} />
       </Routes>
     </Router>
+=======
+    <>
+      <Header />
+    </>
+
+    
   );
 }
 
