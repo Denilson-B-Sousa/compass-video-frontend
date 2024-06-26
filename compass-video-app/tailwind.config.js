@@ -30,7 +30,7 @@ export default {
 
         opacity: {
           'white-10': '#FFFFFF/10',
-          '40': '#F9F9F9/40',
+          'white-40': '#F9F9F9/40',
           'black-10': '#000000/10',
           '12': '#FFFFFF/12',
         },
@@ -53,7 +53,9 @@ export default {
         'montserrat': 'Montserrat',
         'worksans': 'Work Sans',
         'lato': 'Lato'
-      }
+      },
+
+      
     },
   },
   plugins: [],
