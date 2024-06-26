@@ -1,7 +1,7 @@
-import React from 'react';
 
-const Login: React.FC = () => {
+export function Login() {
   const tmdbAuthUrl = 'https://www.themoviedb.org/authenticate/';
+  const VITE_API_TOKEN = import.meta.env.VITE_API_TOKEN;
 
   const handleLogin = async () => {
     try {
@@ -9,7 +9,7 @@ const Login: React.FC = () => {
       const response = await fetch('https://api.themoviedb.org/3/authentication/token/new', {
         method: 'GET',
         headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZDAxYzQwNzg2YjMxNGViYjI1ZWRjY2JiZGE0NDVmNyIsIm5iZiI6MTcxOTI1ODQ5NS4xODA5MTIsInN1YiI6IjY2NzljNzA5YjdiYjhlY2JmZThhNGJlNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.jyphNJC8uH18Nh0WPQv7azYuBvszxVlOmTGWl96YOuo`,
+          Authorization: `Bearer ${VITE_API_TOKEN}`,
           'Content-Type': 'application/json;charset=utf-8',
         },
       });
@@ -45,4 +45,4 @@ const Login: React.FC = () => {
   );
 }
 
-export default Login;
+
