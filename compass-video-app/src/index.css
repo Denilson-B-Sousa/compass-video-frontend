@@ -22,7 +22,8 @@
 body {
   width: 1512px;
   margin: auto;
-=======
+}
+
 .footer-text{
     @apply font-lato text-white text-center;
 }
