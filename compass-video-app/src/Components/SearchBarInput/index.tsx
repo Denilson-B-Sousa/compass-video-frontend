@@ -1,5 +1,6 @@
 import { MagnifyingGlass, X } from "@phosphor-icons/react";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface SearchBarProps {
   onCloseSearchBar: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -8,9 +9,20 @@ interface SearchBarProps {
 export function SearchBarInput({ onCloseSearchBar }: SearchBarProps) {
   const [inputValue, setInputValue] = useState<string>("");
   const [selectValue, setSelectValue] = useState<string>("Tudo");
+  const navigator = useNavigate();
 
   const handleSearch = () => {
-    alert(`${inputValue} + ${selectValue}`);
+    let searchValue: string;
+
+    if(!inputValue){
+      // Se não tiver nada escrito pesquisa por categoria
+      searchValue = selectValue;
+    } 
+    else{
+      // Se tiver algo escrito pesquisa por isso
+      searchValue = inputValue;
+    }
+    navigator(`/search/${searchValue}`);
   };
 
   return (
