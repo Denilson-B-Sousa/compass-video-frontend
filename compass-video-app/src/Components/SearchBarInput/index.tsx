@@ -54,12 +54,13 @@ export function SearchBarInput({ onCloseSearchBar }: SearchBarProps) {
           onClick={handleSearch}
           className="text-white cursor-pointer"
         />
-        <X
-          size={20}
-          weight="bold"
-          onClick={onCloseSearchBar}
-          className="text-white cursor-pointer"
-        />
+        <button onClick={onCloseSearchBar}>
+          <X
+            size={20}
+            weight="bold"
+            className="text-white cursor-pointer"
+          />
+        </button>
       </div>
     </div>
   );

@@ -1,19 +1,9 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import React from 'react';
-import {Login} from 'Components/Login';
-=======
-import { Header } from "@components/Header/Header";
+// import { Login } from '@components/Login/index';
+import { Header } from "@components/Header";
 
 function App() {
 
-const App: React.FC = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Login/>} />
-      </Routes>
-    </Router>
-=======
     <>
       <Header />
     </>

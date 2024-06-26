@@ -1,4 +1,3 @@
-import { NavLink } from "react-router-dom";
 import {
   House,
   Television,
@@ -7,9 +6,9 @@ import {
   MagnifyingGlass,
   FirstAid,
 } from "@phosphor-icons/react";
-import React, { useState } from "react";
-import { SearchBarInput } from "@components/SearchBarInput/SearchBarInput";
-import { MenuUser } from "@components/MenuUser/MenuUser";
+import { useState } from "react";
+import { SearchBarInput } from "@components/SearchBarInput";
+import { MenuUser } from "@components/MenuUser";
 
 
 export function Header() {
