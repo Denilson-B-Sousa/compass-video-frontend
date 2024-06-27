@@ -1,3 +1,5 @@
+import { PageButtons } from "@components/PageButtons"
+
 export function Home() {
   return (
     <div className="bg-main-movie pt-60 md:pt-0">
@@ -19,12 +21,7 @@ export function Home() {
               abandoned theme restaurant: Freddy Fazbear's Pizzeria. But he soon
               discovers that nothing at Freddy's is what it seems.
             </p>
-            <div className="mt-5 flex flex-col md:flex-row gap-3">
-              <h2 className="text-white">Botão Ver Agora</h2>
-              <h2 className="text-white">Botão Mais Informações</h2>
-              <h2 className="text-white">Botão Adicionar a Lista</h2>
-              <h2 className="text-white">Botão Salvar aos Favoritos</h2>
-            </div>
+            <PageButtons />
           </div>
         </div>
       </div>
