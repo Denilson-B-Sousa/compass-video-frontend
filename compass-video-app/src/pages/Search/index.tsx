@@ -6,7 +6,7 @@ export function Search() {
 
   return (
     <>
-    <div className="bg-neutral-600 p-8 h-screen">
+    <div className="bg-neutral-600 p-8 h-screen pt-56 md:pt-20">
       <h2 className="font-worksans text-applications-medium-emphasis text-lg mb-3">
         Resultados para sua busca:
         <span className="text-white"> "{query}"</span>

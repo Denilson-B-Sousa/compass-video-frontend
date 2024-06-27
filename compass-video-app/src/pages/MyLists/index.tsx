@@ -1,7 +1,7 @@
 export function MyLists(){
   return (
     <>
-    <div className="bg-neutral-600 p-8 h-screen">
+    <div className="bg-neutral-600 p-8 h-screen pt-56 md:pt-20">
       <h2 className="font-lato text-white font-bold text-2xl mb-2 tracking-wide">
         Minhas Listas
       </h2>
