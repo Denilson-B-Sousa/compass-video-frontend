@@ -1,11 +1,12 @@
 // import { Login } from '@components/Login/index';
+import { Carousel } from "Components/Carousel";
 import { Router } from "./Router";
 
 function App() {
 
   return (
     <>
-      <Router/>
+      <Carousel/>
     </>
 
     
