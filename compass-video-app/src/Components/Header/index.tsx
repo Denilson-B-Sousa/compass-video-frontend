@@ -25,7 +25,7 @@ export function Header() {
   };
 
   return (
-    <header className="bg-gradient-to-b from-applications-header to-transparent flex flex-wrap justify-center md:justify-between items-center px-4 py-2">
+    <header className="bg-gradient-to-b from-applications-header to-transparent flex flex-wrap justify-center md:justify-between items-center px-4 py-2 absolute w-full">
       <div className="order-0 md:order-none md:hidden">
         <img
           src="..\src\assets\Images\logo-compass.svg"
@@ -35,7 +35,7 @@ export function Header() {
       </div>
 
       <div className="order-2 md:order-none">
-        <ul className="flex flex-wrap items-center gap-5">
+        <ul className="flex flex-wrap items-center justify-center gap-5">
           <li>
             <img
               src="..\src\assets\Images\logo-compass.svg"
