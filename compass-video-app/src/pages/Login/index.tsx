@@ -19,8 +19,8 @@ export function Login() {
 
       localStorage.setItem('requestToken', requestToken);
 
-     
-      window.location.href = `${tmdbAuthUrl}${requestToken}?redirect_to=http://localhost:3000/authenticated`;
+      // Redirecionar para a página de autenticação
+      window.location.href = `${tmdbAuthUrl}${requestToken}?redirect_to=http://localhost:5173/`;
     } catch (error) {
       console.error('Erro ao obter request token:', error);
     }

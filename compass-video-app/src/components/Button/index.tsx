@@ -11,6 +11,7 @@ const button = tv({
             default: 'w-12 h-12 p-3 font-bold',
             sm: 'w-10 h-10 p-3',
             md: 'px-6 py-3.5 rounded-[4px]',
+            primary: 'flex justify-center items-center p-2 md:px-4 rounded',
         },
 
         primary: {
@@ -22,7 +23,11 @@ const button = tv({
         },
 
         outlined: {
-            true: ' border-white border-2 rounded-[4px] text-white hover:text-black!important hover:bg-black hover:text-white/90 bg-transparent hover:border-black hover:filter hover:invert hover:grayscale hover:brightness-100'
+            true: ' border-white border rounded-[4px] text-white hover:text-black!important hover:bg-black hover:text-white/90 bg-transparent hover:border-black hover:filter hover:invert hover:grayscale hover:brightness-100'
+        },
+
+        outlinedSecondary: {
+            true: ' border-white border rounded-full text-white hover:text-black!important hover:bg-black hover:text-white/90 bg-transparent hover:border-black hover:filter hover:invert hover:grayscale hover:brightness-100'
         },
 
         outlinedCircle: {
@@ -46,20 +51,22 @@ export type ButtonProps = ComponentProps<'button'> &
         secondary?: boolean;
         outlined?: boolean;
         outlinedCircle?: boolean;
+        outlinedSecondary?: boolean;
         outlinedCircleCheck?: boolean;
         outlineCirclePrimary?: boolean;
     }; 
 
-export function Button({primary, secondary, outlined, outlinedCircle, outlinedCircleCheck, outlineCirclePrimary, size, ...props}: ButtonProps) {
+export function Button({primary, secondary, outlined, outlinedCircle, outlinedSecondary, outlinedCircleCheck, outlineCirclePrimary, size, ...props}: ButtonProps) {
     return (
         <button
             data-primary={primary}
             data-secondary={secondary}
             data-outlined={outlined}
             data-outlinedCircle={outlinedCircle}
+            data-outlinedSecondary={outlinedSecondary}
             data-outlinedCircleCheck={outlinedCircleCheck}
             data-outlineCirclePrimary={outlineCirclePrimary}
-            className={button({size, primary, secondary, outlined, outlinedCircle, outlinedCircleCheck, outlineCirclePrimary})}
+            className={button({size, primary, secondary, outlined, outlinedSecondary, outlinedCircle, outlinedCircleCheck, outlineCirclePrimary})}
             {...props}
         >
  
