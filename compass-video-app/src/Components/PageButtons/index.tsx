@@ -7,14 +7,14 @@ import { Tooltip } from "react-tooltip";
 
 export function PageButtons() {
   return (
-    <div className="mt-5 flex flex-col md:flex-row gap-3">
+    <div className="mt-5 flex flex-col md:flex-row gap-5">
       <Tooltip
         id="my-tooltip"
         place="top"
         className="font-worksans text-neutral-600 font-semibold"
       />
 
-      <Button secondary size="secoundary">
+      <Button secondary size="primary">
         <img src={playblack} alt="" className="mr-3" />
         Ver Agora
       </Button>
