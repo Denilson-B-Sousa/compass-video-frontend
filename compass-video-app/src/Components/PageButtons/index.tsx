@@ -7,7 +7,7 @@ import plus from "@assets/Images/icon/plus.svg";
 export function PageButtons() {
   return (
     <div className="mt-5 flex flex-col md:flex-row gap-3">
-      <Button secondary size="primary">
+      <Button secondary size="secoundary">
         <img src={playblack} alt="" className="mr-3" />
         Ver Agora
       </Button>
@@ -15,7 +15,7 @@ export function PageButtons() {
         <img src={info} alt="" className="mr-3" />
         Mais Informações
       </Button>
-      <div className="flex gap-3 items-center">
+      <div className="flex gap-4 items-center">
         <Button
           outlinedSecondary
           size="default"

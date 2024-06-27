@@ -12,6 +12,7 @@ const button = tv({
             sm: 'w-10 h-10 p-3',
             md: 'px-6 py-3.5 rounded-[4px]',
             primary: 'flex justify-center items-center p-2 md:w-1/2 rounded',
+            secoundary: 'flex justify-center items-center p-2 rounded',
         },
 
         primary: {
