@@ -5,7 +5,7 @@ export function Login() {
 
   const handleLogin = async () => {
     try {
-      // Obter o request token
+     
       const response = await fetch('https://api.themoviedb.org/3/authentication/token/new', {
         method: 'GET',
         headers: {
@@ -17,10 +17,35 @@ export function Login() {
       const data = await response.json();
       const requestToken = data.request_token;
 
+      localStorage.setItem('requestToken', requestToken);
+
       // Redirecionar para a página de autenticação
       window.location.href = `${tmdbAuthUrl}${requestToken}?redirect_to=http://localhost:5173/`;
     } catch (error) {
       console.error('Erro ao obter request token:', error);
+    }
+  };
+
+  const handleGuestLogin = async () => {
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: `Bearer ${VITE_API_TOKEN}`
+      },
+    };
+
+    try {
+      const response = await fetch('https://api.themoviedb.org/3/authentication/guest_session/new', options);
+      const data = await response.json();
+      const guestSessionId = data.guest_session_id;
+
+      localStorage.setItem('guestSessionId', guestSessionId);
+
+      window.location.href = `/home`
+    }
+    catch (error) {
+      console.error('Erro ao criar sessão como convidado: ', error)
     }
   };
 
@@ -35,7 +60,8 @@ export function Login() {
           INICIAR SESSÃO COM TMDB
         </button>
         <p className='font-lato text-[14px] text-white font-medium'>
-          <span className='text-[rgba(255,255,255,0.6)] font-normal tracking-wide'>Não tem conta?</span> Acesse como convidado
+          <span className='text-[rgba(255,255,255,0.6)] font-normal tracking-wide'>Não tem conta?</span>
+          <span onClick={handleGuestLogin} className="cursor-pointer">Acesse como convidado</span>
         </p>
         <div className="flex w-[330px] h-[112.95px]">
           <img src="/src/assets/Images/compass.uol_Negativo 1.png" alt="Compass Logo" />
