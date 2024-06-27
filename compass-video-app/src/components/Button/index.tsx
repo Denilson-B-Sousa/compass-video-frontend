@@ -11,7 +11,7 @@ const button = tv({
             default: 'w-12 h-12 p-3 font-bold',
             sm: 'w-10 h-10 p-3',
             md: 'px-6 py-3.5 rounded-[4px]',
-            primary: 'flex justify-center items-center p-2 md:w-1/2 rounded',
+            primary: 'flex justify-center items-center p-2 md:px-4 rounded',
         },
 
         primary: {
