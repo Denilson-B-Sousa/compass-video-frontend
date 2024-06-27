@@ -25,7 +25,7 @@ export function SearchBarInput({ onCloseSearchBar }: SearchBarProps) {
   }
 
   return (
-    <div className="bg-neutral-700 p-3 flex gap-4 rounded items-center">
+    <form className="bg-neutral-700 p-3 flex gap-4 rounded items-center" onSubmit={handleSearch}>
       <div>
         <input
           type="text"
@@ -34,6 +34,7 @@ export function SearchBarInput({ onCloseSearchBar }: SearchBarProps) {
           onChange={(e) => setInputValue(e.target.value)}
           className="bg-transparent text-white mr-3 w-full outline-none focus:outline-[#FFFFFF1F] rounded"
           onKeyDown={handleSearchByKey}
+          required
         />
       </div>
       <div>
@@ -60,12 +61,13 @@ export function SearchBarInput({ onCloseSearchBar }: SearchBarProps) {
         </select>
       </div>
       <div className="flex gap-3">
+        <button type="submit">
         <MagnifyingGlass
           size={20}
           weight="bold"
-          onClick={handleSearch}
           className="text-white cursor-pointer"
         />
+        </button>
         <button onClick={onCloseSearchBar}>
           <X
             size={20}
@@ -74,6 +76,6 @@ export function SearchBarInput({ onCloseSearchBar }: SearchBarProps) {
           />
         </button>
       </div>
-    </div>
+    </form>
   );
 }
