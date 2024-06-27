@@ -84,7 +84,7 @@ export function Header() {
       </div>
 
       <div className="order-1 md:order-none">
-        <ul className="flex items-center gap-5 pb-2 md:pb-0">
+        <ul className="flex flex-wrap justify-center items-center gap-5 pb-2 md:pb-0">
           {isSearchBarOpen ? (
             <SearchBarInput
               onCloseSearchBar={() => setIsSearchBarOpen(false)}
