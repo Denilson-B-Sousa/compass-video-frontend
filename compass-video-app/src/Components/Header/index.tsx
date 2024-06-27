@@ -46,7 +46,7 @@ export function Header() {
           <li>
             <NavLink
               className={({ isActive }) => (isActive ? "active-link header-item" : "header-item")}
-              to="/home"
+              to="/"
             >
             <House size={20} weight="fill" />
             <p>Início</p>

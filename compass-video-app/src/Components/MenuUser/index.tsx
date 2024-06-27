@@ -70,7 +70,7 @@ export function MenuUser() {
               <li className="header-item">Ajuda</li>
               <li
                 className="header-item"
-                onClick={() => navigator('/')}
+                onClick={() => navigator('/login')}
               >
                 Sair
               </li>

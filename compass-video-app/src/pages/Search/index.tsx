@@ -1,5 +1,3 @@
-import { Header } from "@components/Header";
-import { Footer } from "@components/Footer";
 import { useParams } from "react-router-dom";
 
 export function Search() {
@@ -8,7 +6,6 @@ export function Search() {
 
   return (
     <>
-    <Header />
     <div className="bg-neutral-600 p-8 h-screen">
       <h2 className="font-worksans text-applications-medium-emphasis text-lg mb-3">
         Resultados para sua busca:
@@ -19,7 +16,6 @@ export function Search() {
         Sem resultados
       </p>
     </div>
-    <Footer />
     </>
   );
 }

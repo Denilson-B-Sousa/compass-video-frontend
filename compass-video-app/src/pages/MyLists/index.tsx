@@ -1,10 +1,6 @@
-import { Footer } from '@components/Footer'
-import { Header } from '@components/Header'
-
 export function MyLists(){
   return (
     <>
-    <Header />
     <div className="bg-neutral-600 p-8 h-screen">
       <h2 className="font-lato text-white font-bold text-2xl mb-2 tracking-wide">
         Minhas Listas
@@ -17,7 +13,6 @@ export function MyLists(){
         Você ainda não possui nenhuma lista!
       </p>
     </div>
-    <Footer />
     </>
   )
 }
