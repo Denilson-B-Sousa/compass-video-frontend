@@ -43,7 +43,6 @@ export function Search() {
         options
       );
       const data = await response.json();
-      console.log(data.results)
       setData(data.results);
     } catch (err) {
       console.error("Erro ao dados:", err);
@@ -92,12 +91,13 @@ export function Search() {
         {data.length > 0 ? (
           <div className="flex flex-wrap justify-center h-full">
             {data.map((dado: Data) => (
-              <div key={dado.id} className="p-2">
+              <div key={dado.id} className="p-2 flex justify-center items-center group cursor-default">
                 <img
                   src={getImageSource(dado)}
                   alt={dado.title || dado.name}
-                  className="w-40 rounded-lg h-full object-cover"
+                  className="w-40 rounded-lg h-full object-cover group-hover:opacity-30"
                 />
+                <p className="searchCard opacity-0 group-hover:opacity-100">{dado.title || dado.name}</p>
               </div>
             ))}
           </div>
