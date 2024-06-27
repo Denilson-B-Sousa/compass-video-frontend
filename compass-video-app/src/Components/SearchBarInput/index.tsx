@@ -1,5 +1,5 @@
 import { MagnifyingGlass, X } from "@phosphor-icons/react";
-import React, { useState } from "react";
+import React, { useState, KeyboardEvent } from "react";
 import { useNavigate } from "react-router-dom";
 
 interface SearchBarProps {
@@ -12,18 +12,17 @@ export function SearchBarInput({ onCloseSearchBar }: SearchBarProps) {
   const navigator = useNavigate();
 
   const handleSearch = () => {
-    let searchValue: string;
+    const searchValue:string = `${inputValue}!${selectValue}`
 
-    if(!inputValue){
-      // Se não tiver nada escrito pesquisa por categoria
-      searchValue = selectValue;
-    } 
-    else{
-      // Se tiver algo escrito pesquisa por isso
-      searchValue = inputValue;
-    }
+   
     navigator(`/search/${searchValue}`);
   };
+
+  const handleSearchByKey = (e: KeyboardEvent<HTMLInputElement>) => {
+    if(e.key === 'Enter'){
+      handleSearch()
+    }
+  }
 
   return (
     <div className="bg-neutral-700 p-3 flex gap-4 rounded items-center">
@@ -34,6 +33,7 @@ export function SearchBarInput({ onCloseSearchBar }: SearchBarProps) {
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           className="bg-transparent text-white mr-3 w-full outline-none focus:outline-[#FFFFFF1F] rounded"
+          onKeyDown={handleSearchByKey}
         />
       </div>
       <div>
