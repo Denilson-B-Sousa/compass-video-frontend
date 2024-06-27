@@ -1,19 +1,17 @@
-// import { Login } from '@components/Login/index';
-import { Router } from "./Router";
+import { Outlet } from "react-router-dom";
+import { Footer, Header } from "./components";
 
 function App() {
 
   return (
     <>
-      <Router/>
+      <Header />
+        <Outlet/>
+      <Footer />
     </>
 
     
   );
 }
-
-// const Authenticated: React.FC = () => {
-//   return <h1>Autenticação bem-sucedida!</h1>;
-// };
 
 export default App;

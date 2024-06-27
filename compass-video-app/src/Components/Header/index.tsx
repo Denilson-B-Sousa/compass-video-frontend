@@ -9,6 +9,7 @@ import {
 import { useState } from "react";
 import { SearchBarInput } from "@components/SearchBarInput";
 import { MenuUser } from "@components/MenuUser";
+import { NavLink } from "react-router-dom";
 
 
 export function Header() {
@@ -24,91 +25,87 @@ export function Header() {
   };
 
   return (
-    <header className="bg-gradient-to-b from-applications-header to-transparent flex flex-wrap justify-center md:justify-between items-center px-4 py-2">
+    <header className="bg-gradient-to-b from-applications-header to-transparent flex flex-wrap justify-center md:justify-between items-center px-4 py-2 absolute w-full">
       <div className="order-0 md:order-none md:hidden">
         <img
-          src=".\src\assets\Images\logo-compass.svg"
+          src="..\src\assets\Images\logo-compass.svg"
           alt="Logo Compass"
           className="block md:hidden"
         />
       </div>
 
       <div className="order-2 md:order-none">
-        <ul className="flex flex-wrap justify-center gap-5">
+        <ul className="flex flex-wrap items-center justify-center gap-5">
           <li>
             <img
-              src=".\src\assets\Images\logo-compass.svg"
+              src="..\src\assets\Images\logo-compass.svg"
               alt="Logo Compass"
               className="hidden md:mr-3 md:block"
             />
           </li>
-          <li className="header-item">
-            {/* <NavLink
-              className={({ isActive }) => (isActive ? "active-link" : "")}
-              to="/home"
+          <li>
+            <NavLink
+              className={({ isActive }) => (isActive ? "active-link header-item" : "header-item")}
+              to="/"
             >
-              
-            </NavLink> */}
             <House size={20} weight="fill" />
             <p>Início</p>
+            </NavLink>
+            
           </li>
-          <li className="header-item">
-            {/* <NavLink
-              className={({ isActive }) => (isActive ? "active-link" : "")}
+          <li>
+            <NavLink
+              className={({ isActive }) => (isActive ? "active-link header-item" : "header-item")}
               to="/series"
             >
-              
-            </NavLink> */}
             <Television size={20} weight="fill" />
             <p>Séries</p>
+            </NavLink>
           </li>
-          <li className="header-item">
-            {/* <NavLink
-              className={({ isActive }) => (isActive ? "active-link" : "")}
+          <li>
+            <NavLink
+              className={({ isActive }) => (isActive ? "active-link header-item" : "header-item")}
               to="/movies"
             >
-              
-            </NavLink> */}
             <FilmReel size={20} weight="fill" />
             <p>Filmes</p>
+            </NavLink>
           </li>
-          <li className="header-item">
-            {/* <NavLink
-              className={({ isActive }) => (isActive ? "active-link" : "")}
+          <li>
+            <NavLink
+              className={({ isActive }) => (isActive ? "active-link header-item" : "header-item")}
               to="/stars"
             >
-              
-            </NavLink> */}
             <Star size={20} weight="fill" />
             <p>Celebridades</p>
+            </NavLink>
           </li>
         </ul>
       </div>
 
       <div className="order-1 md:order-none">
-        <ul className="flex items-center gap-5 pb-2 md:pb-0">
+        <ul className="flex flex-wrap justify-center items-center gap-5 pb-2 md:pb-0">
           {isSearchBarOpen ? (
             <SearchBarInput
               onCloseSearchBar={() => setIsSearchBarOpen(false)}
             />
           ) : (
-            <li className="header-item" onClick={handleOpenSearchBar}>
+            <li className="header-item" onClick={handleOpenSearchBar} >
               <MagnifyingGlass size={20} weight="bold" />
               <p>Buscar</p>
             </li>
           )}
 
-          <li className="header-item" onClick={() => alert("tela de minha-lista")}>
-            {/* <NavLink
-              className={({ isActive }) => (isActive ? "active-link" : "")}
-              to="/my-list"
+          <li>
+            <NavLink
+              className={({ isActive }) => (isActive ? "active-link header-item" : "header-item")}
+              to="/my-lists"
             >
-              
-            </NavLink> */}
             <FirstAid size={20} weight="fill" />
-            <p>Minha lista</p>
+            <p>Minhas listas</p>
+            </NavLink>
           </li>
-          <li className="header-item" >
+          <li>
             <MenuUser />
           </li>
         </ul>

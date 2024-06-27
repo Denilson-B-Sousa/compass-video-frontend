@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface MenuPosition {
   top: number;
@@ -7,6 +8,8 @@ interface MenuPosition {
 export function MenuUser() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [menuPosition, setMenuPosition] = useState<MenuPosition>({ top: 0 });
+
+  const navigator = useNavigate();
 
   const handleOpenMenu = (
     event: React.MouseEvent<HTMLImageElement, MouseEvent>
@@ -29,7 +32,7 @@ export function MenuUser() {
   return (
     <div>
       <img
-        src=".\src\assets\Images\icon\avatar.svg"
+        src="..\src\assets\Images\icon\avatar.svg"
         alt="avatar-icon"
         className="header-item"
         onClick={handleOpenMenu}
@@ -43,15 +46,15 @@ export function MenuUser() {
           <div>
             <ul className="flex flex-col gap-4">
               <li className="flex gap-3 cursor-pointer">
-                <img src=".\src\assets\Images\icon\avatar2.svg" alt="" />
+                <img src="..\src\assets\Images\icon\avatar2.svg" alt="" />
                 <span className="header-item text-xs">Leslie Alexander</span>
               </li>
               <li className="flex gap-3 cursor-pointer">
-                <img src=".\src\assets\Images\icon\avatar3.svg" alt="" />
+                <img src="..\src\assets\Images\icon\avatar3.svg" alt="" />
                 <span className="header-item">Ronald Richards</span>
               </li>
               <li className="flex gap-3 cursor-pointer mb-5">
-                <img src=".\src\assets\Images\icon\createAvatar.svg" alt="" />
+                <img src="..\src\assets\Images\icon\createAvatar.svg" alt="" />
                 <span className="header-item">Criar Perfil</span>
               </li>
             </ul>
@@ -67,7 +70,7 @@ export function MenuUser() {
               <li className="header-item">Ajuda</li>
               <li
                 className="header-item"
-                onClick={() => alert("Voltar ao login")}
+                onClick={() => navigator('/login')}
               >
                 Sair
               </li>

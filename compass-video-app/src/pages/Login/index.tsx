@@ -18,7 +18,7 @@ export function Login() {
       const requestToken = data.request_token;
 
       // Redirecionar para a página de autenticação
-      window.location.href = `${tmdbAuthUrl}${requestToken}?redirect_to=http://localhost:3000/authenticated`;
+      window.location.href = `${tmdbAuthUrl}${requestToken}?redirect_to=http://localhost:5173/`;
     } catch (error) {
       console.error('Erro ao obter request token:', error);
     }
