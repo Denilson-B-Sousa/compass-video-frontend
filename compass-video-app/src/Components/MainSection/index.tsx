@@ -41,7 +41,7 @@ export function MainSection({ type }: MainType) {
       );
       const response_data = await response.json();
       setData(response_data.results[Math.floor(Math.random() * 20)]);
-      await writeGenresById(data!.genre_ids);
+      writeGenresById(data!.genre_ids);
     } catch (err) {
       console.error("Erro ao dados:", err);
     }
@@ -60,7 +60,6 @@ export function MainSection({ type }: MainType) {
           gendersMap[gender.id] = gender.name;
       })
         const genderNames = gendersIds.map(id => gendersMap[id]);
-        console.log(genderNames)
 
         if(genderNames){
             setGenders(genderNames);
