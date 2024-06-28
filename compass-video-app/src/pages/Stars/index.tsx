@@ -29,7 +29,10 @@ export function Stars(){
         options
       );
       const response_data = await response.json();
-      setStars(response_data.results.slice(0, 3));
+      for (let i = 0; i < 2; i++) {
+        let randomN = Math.floor(Math.random() * 20);
+        setStars(prevStars => [...prevStars, response_data.results[randomN]]);
+      }
     } catch (err) {
       console.error("Erro ao dados:", err);
     }
