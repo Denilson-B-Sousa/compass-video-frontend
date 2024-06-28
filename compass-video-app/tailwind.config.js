@@ -53,9 +53,6 @@ export default {
         'worksans': 'Work Sans',
         'lato': 'Lato'
       },
-      backgroundImage: {
-        'main-movie': "linear-gradient(221.31deg, rgba(26, 29, 41, 0) 49.29%, rgba(26, 29, 41, 0.791667) 77.96%, #1A1D29 97.36%), linear-gradient(179.79deg, rgba(26, 29, 41, 0) 15.81%, rgba(26, 29, 41, 0.791667) 64.73%, #1A1D29 97.83%),  url('../src/assets/Images/cover.png')"
-      },
     },
   },
   plugins: [
