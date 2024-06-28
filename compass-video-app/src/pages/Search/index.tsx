@@ -95,7 +95,7 @@ export function Search() {
                 <img
                   src={getImageSource(dado)}
                   alt={dado.title || dado.name}
-                  className="w-40 rounded-lg h-full object-cover group-hover:opacity-30"
+                  className="w-40 rounded-lg h-full group-hover:opacity-30"
                 />
                 <p className="searchCard opacity-0 group-hover:opacity-100">{dado.title || dado.name}</p>
               </div>
