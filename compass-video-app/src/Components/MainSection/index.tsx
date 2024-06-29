@@ -2,7 +2,8 @@ import { PageButtons } from '@components/PageButtons'
 import { useEffect, useState } from 'react';
 
 interface MainType{
-    type: string;
+    type: "movie" | "tv";
+    topInfo: boolean;
 }
 
 interface Data{
@@ -19,7 +20,7 @@ interface Gender{
     name: string;
 }
 
-export function MainSection({ type }: MainType) {
+export function MainSection({ type, topInfo }: MainType) {
 
     const [data, setData] = useState<Data>();
     const [genders, setGenders] = useState([]);
@@ -88,9 +89,31 @@ export function MainSection({ type }: MainType) {
   return (
     <>
     {data && 
-    <div className={'bg-cover bg-center pt-60'} style={{ backgroundImage: `${gradient}, url(https://image.tmdb.org/t/p/original${data.backdrop_path})` }}>
+    <div className={`bg-cover bg-center ${topInfo ? "pt-60 md:pt-20" : "pt-60"}`} style={{ backgroundImage: `${gradient}, url(https://image.tmdb.org/t/p/original${data.backdrop_path})` }}>
         <div className="h-full">
-          <div className=" h-full p-8 flex items-center">
+          <div className={`h-full p-8 ${topInfo && "flex flex-col"}`}>
+            {topInfo && (<div className='flex gap-3 items-center mb-28'>
+            <p className='text-3xl text-white font-lato'>{type === "movie" ? "Filmes" : "Séries"}</p>
+            <select
+          className="bg-neutral-600/90 text-white rounded-full p-0.5 border-2 border-[#FFFFFF1F]"
+        >
+          <option disabled selected hidden className="text-white">
+            Gêneros
+          </option>
+          <option className="text-white">
+            {type === "movie" ? "Animação" : "Ação"}
+          </option>
+          <option className="text-white">
+            Aventura
+          </option>
+          <option className="text-white">
+            {type === "movie" ? "Comédia" : "Documentário"}
+          </option>
+          <option className="text-white">
+            {type === "movie" ? "Terror" : "Drama"}
+          </option>
+            </select>
+          </div>)}
             <div className="md:w-1/2 flex flex-col gap-3">
               <h1 className="text-applications-high-emphasis font-worksans text-5xl font-bold tracking-wide">
                 {data.title}
