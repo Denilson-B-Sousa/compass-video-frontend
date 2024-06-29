@@ -10,7 +10,9 @@ interface Data{
   id: number;
   backdrop_path: string;
   title: string;
+  name: string;
   release_date: string;
+  first_air_date: string;
   genre_ids: [];
   overview: string;
 }
@@ -116,13 +118,13 @@ export function MainSection({ type, topInfo }: MainType) {
           </div>)}
             <div className="md:w-1/2 flex flex-col gap-3">
               <h1 className="text-applications-high-emphasis font-worksans text-5xl font-bold tracking-wide">
-                {data.title}
+                 {type === "movie" ? data.title: data.name}
               </h1>
               <p className="text-applications-high-emphasis font-worksans">
-                {data.release_date.slice(0, 4)}
+                {type === "movie" ? data.release_date.slice(0, 4) : data.first_air_date.slice(0, 4)}
               </p>
               <p className="text-applications-high-emphasis font-worksans text-sm">
-                {genders.length > 1 ? (genders.join(', ')) : "Não informado"}
+                {genders.length > 1 ? (genders.join(', ')) : "Gêneros não informados"}
               </p>
               <p className="text-applications-high-emphasis font-worksans text-lg">
                 {data.overview}
