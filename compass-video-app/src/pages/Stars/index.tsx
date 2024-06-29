@@ -47,7 +47,7 @@ export function Stars(){
   return (
     <>
       <div className="bg-neutral-600">
-      <MainSection type="movie" />
+      <MainSection type="movie" topInfo={false}  />
       <div className="px-8 pb-8 py-14 md:p-8">
         {stars.map((star: Star) => (
           <div className="flex flex-wrap gap-3 items-center">
