@@ -8,6 +8,7 @@ import { Movies } from "@pages/Movies/index.tsx";
 import { Stars } from "@pages/Stars/index.tsx";
 import { MyLists } from "@pages/MyLists/index.tsx";
 import { Login } from "@components/index.ts";
+import { MovieDetails } from "@pages/MovieDetails/index.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ export const router = createBrowserRouter([
       {
         path: "/my-lists",
         element: <MyLists />
+      },
+      {
+        path: "/details/:type/:id", 
+        element: <MovieDetails />
       }
     ],
   },
