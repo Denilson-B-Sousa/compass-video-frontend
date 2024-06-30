@@ -69,7 +69,7 @@ export function Stars(){
               />
             </div>
             <div className="w-full">
-              <Carousel />
+              <Carousel text="Conhecido(a) por" type="knownFor" knownFor={star.known_for} />
             </div>
           </div>
         ))}

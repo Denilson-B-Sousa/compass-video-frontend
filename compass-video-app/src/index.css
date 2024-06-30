@@ -17,6 +17,6 @@
     @apply text-primary-accent;
 }
 
-.searchCard{
+.imageCard{
     @apply font-worksans text-white w-32 text-center text-wrap absolute; 
 }

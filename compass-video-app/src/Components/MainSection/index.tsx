@@ -15,6 +15,7 @@ interface Data{
   first_air_date: string;
   genre_ids: [];
   overview: string;
+  media_type: string;
 }
 
 interface Gender{
@@ -44,6 +45,7 @@ export function MainSection({ type, topInfo }: MainType) {
       );
       const response_data = await response.json();
       setData(response_data.results[Math.floor(Math.random() * 20)]);
+      console.log(data)
       writeGenresById(data!.genre_ids);
     } catch (err) {
       console.error("Erro ao dados:", err);
@@ -129,7 +131,7 @@ export function MainSection({ type, topInfo }: MainType) {
               <p className="text-applications-high-emphasis font-worksans text-lg">
                 {data.overview}
               </p>
-              <PageButtons />
+              <PageButtons mediaId={data.id} mediaType={data.media_type}  />
             </div>
           </div>
         </div>

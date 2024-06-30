@@ -7,22 +7,54 @@ import { Tooltip } from "react-tooltip";
 import { useState } from "react";
 import { Check } from "@phosphor-icons/react";
 
-export function PageButtons() {
+interface Media {
+  mediaId: number;
+  mediaType: string;
+}
 
+export function PageButtons({ mediaId, mediaType }: Media) {
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
   const [isOnList, setIsOnList] = useState<boolean>(false);
+  const account_id = 21347274;
 
   const handleAddToFavorites = () => {
-    if(!isFavorite){
+    if (!isFavorite) {
+      Favorite(account_id, true);
       setIsFavorite(true);
-    } else setIsFavorite(false);
-  }
+    } else {
+      Favorite(account_id, false);
+      setIsFavorite(false);
+    }
+  };
 
-  const handleAddToList = () => {
-    if(!isOnList){
+  const handleAddToWatchList = () => {
+    if (!isOnList) {
       setIsOnList(true);
     } else setIsOnList(false);
-  }
+  };
+
+  const Favorite = async (accountId: number, favorite: boolean) => {
+    const options = {
+      method: "POST",
+      headers: {
+        accept: "application/json",
+        "content-type": "application/json",
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZDAxYzQwNzg2YjMxNGViYjI1ZWRjY2JiZGE0NDVmNyIsIm5iZiI6MTcxOTI1NzYzNC4wNjU0Miwic3ViIjoiNjY3OWM3MDliN2JiOGVjYmZlOGE0YmU1Iiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.OmEXRdoZEQA3u5pgE-Hg1K_XvpOXDxds1v-JjvdJiJk",
+      },
+       body: JSON.stringify({media_id: `${mediaId}`, media_type: `${mediaType}`, favorite: {favorite}})
+    };
+    try {
+      const response = await fetch(
+        `https://api.themoviedb.org/3/account/${accountId}/favorite`,
+        options
+      );
+      const data = await response.json();
+      console.log(data);
+    } catch (err) {
+      console.error("Erro ao favoritar:", err);
+    }
+  };
 
   return (
     <div className="mt-5 flex flex-col md:flex-row gap-5">
@@ -41,57 +73,53 @@ export function PageButtons() {
         Mais Informações
       </Button>
       <div className="flex gap-4 items-center">
-
-         {!isOnList ? (
+        {!isOnList ? (
           <Button
-          outlinedSecondary
-          size="default"
-          data-tooltip-id="my-tooltip"
-          data-tooltip-content="Adicionar à “assistir mais tarde”"
-          data-tooltip-variant="light"
-          onClick={handleAddToList}
-        >
-          <img src={plus} />
-        </Button>
+            outlinedSecondary
+            size="default"
+            data-tooltip-id="my-tooltip"
+            data-tooltip-content="Adicionar à “assistir mais tarde”"
+            data-tooltip-variant="light"
+            onClick={handleAddToWatchList}
+          >
+            <img src={plus} />
+          </Button>
         ) : (
           <Button
-          outlinedSecondary
-          size="default"
-          data-tooltip-id="my-tooltip"
-          data-tooltip-content="Em “assistir mais tarde”"
-          data-tooltip-variant="light"
-          onClick={handleAddToList}
-        >
-          <Check size={24} weight="bold" color="#02E7F5" />
-        </Button>
+            outlinedSecondary
+            size="default"
+            data-tooltip-id="my-tooltip"
+            data-tooltip-content="Em “assistir mais tarde”"
+            data-tooltip-variant="light"
+            onClick={handleAddToWatchList}
+          >
+            <Check size={24} weight="bold" color="#02E7F5" />
+          </Button>
         )}
-
-        
 
         {!isFavorite ? (
           <Button
-          outlinedSecondary
-          size="default"
-          data-tooltip-id="my-tooltip"
-          data-tooltip-content="Adicionar aos favoritos"
-          data-tooltip-variant="light"
-          onClick={handleAddToFavorites}
-        >
-          <img src={star} alt="" />
-        </Button>
+            outlinedSecondary
+            size="default"
+            data-tooltip-id="my-tooltip"
+            data-tooltip-content="Adicionar aos favoritos"
+            data-tooltip-variant="light"
+            onClick={handleAddToFavorites}
+          >
+            <img src={star} alt="" />
+          </Button>
         ) : (
           <Button
-          outlinedSecondary
-          size="default"
-          data-tooltip-id="my-tooltip"
-          data-tooltip-content="Favorito"
-          data-tooltip-variant="light"
-          onClick={handleAddToFavorites}
-        >
-          <Check size={24} weight="bold" color="#02E7F5" />
-        </Button>
+            outlinedSecondary
+            size="default"
+            data-tooltip-id="my-tooltip"
+            data-tooltip-content="Favorito"
+            data-tooltip-variant="light"
+            onClick={handleAddToFavorites}
+          >
+            <Check size={24} weight="bold" color="#02E7F5" />
+          </Button>
         )}
-
       </div>
     </div>
   );

@@ -3,15 +3,43 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-interface Movie {
+interface CarouselProps{
+  text: string;
+  type: string;
+}
+
+interface Media{
   id: number;
   title: string;
   poster_path: string;
 }
 
-export function Carousel() {
-  const [movies, setMovies] = useState<Movie[]>([]);
+export function Carousel({text, type}: CarouselProps) {
+  const [media, setMedia] = useState([]);
   const VITE_API_MOVIES = import.meta.env.VITE_API_MOVIES;
+  const accountId = 21347274;
+  let apiUrl: string;
+
+  switch(type){
+    case "movies":
+      apiUrl = "https://api.themoviedb.org/3/trending/movie/day?language=pt-BR"
+      break;
+    case "favoriteMovies":
+      apiUrl = `https://api.themoviedb.org/3/account/${accountId}/favorite/movies?language=pt-BR`
+      break;
+    case "favoriteSeries":
+      apiUrl = `https://api.themoviedb.org/3/account/${accountId}/favorite/tv?language=pt-BR`
+      break;
+    case "series":
+      apiUrl = "https://api.themoviedb.org/3/trending/tv/day?language=pt-BR"
+      break;
+    case "collections":
+      apiUrl = "nao existe ainda"
+      break;
+    case "knownFor":
+      apiUrl = "nao existe ainda"
+      break;
+  }
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -26,11 +54,11 @@ export function Carousel() {
 
       try {
         const response = await fetch(
-          "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1",
+          apiUrl,
           options
         );
         const data = await response.json();
-        setMovies(data.results);
+        setMedia(data.results);
       } catch (err) {
         console.error("Erro ao obter os filmes:", err);
       }
@@ -75,18 +103,22 @@ export function Carousel() {
 
   return (
     <div className="p-4">
-      <h2 className="text-white text-xl font-bold">Filmes em alta</h2>
-      <Slider {...settings}>
-        {movies.map((movie) => (
-          <div key={movie.id} className="p-2">
+      <h2 className="text-white text-xl font-bold">{text}</h2>
+      {media.length > 0 ? (
+        <Slider {...settings}>
+        {media.map((media: Media) => (
+          <div key={media.id} className="p-2">
             <img
-              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-              alt={movie.title}
+              src={`https://image.tmdb.org/t/p/w500${media.poster_path}`}
+              alt={media.title}
               className="w-full h-auto gap-5 rounded-lg"
             />
           </div>
         ))}
       </Slider>
+      ) : (
+        <p className="text-white font-worksans text-center">Sem informações</p>
+      )}
     </div>
   );
 }
