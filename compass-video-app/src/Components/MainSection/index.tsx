@@ -2,16 +2,20 @@ import { PageButtons } from '@components/PageButtons'
 import { useEffect, useState } from 'react';
 
 interface MainType{
-    type: string;
+    type: "movie" | "tv";
+    topInfo: boolean;
 }
 
 interface Data{
   id: number;
   backdrop_path: string;
   title: string;
+  name: string;
   release_date: string;
+  first_air_date: string;
   genre_ids: [];
   overview: string;
+  media_type: string;
 }
 
 interface Gender{
@@ -19,7 +23,7 @@ interface Gender{
     name: string;
 }
 
-export function MainSection({ type }: MainType) {
+export function MainSection({ type, topInfo }: MainType) {
 
     const [data, setData] = useState<Data>();
     const [genders, setGenders] = useState([]);
@@ -41,6 +45,7 @@ export function MainSection({ type }: MainType) {
       );
       const response_data = await response.json();
       setData(response_data.results[Math.floor(Math.random() * 20)]);
+      console.log(data)
       writeGenresById(data!.genre_ids);
     } catch (err) {
       console.error("Erro ao dados:", err);
@@ -88,23 +93,48 @@ export function MainSection({ type }: MainType) {
   return (
     <>
     {data && 
-    <div className={'bg-cover bg-center pt-60'} style={{ backgroundImage: `${gradient}, url(https://image.tmdb.org/t/p/original${data.backdrop_path})` }}>
+    <div className={`bg-cover bg-center ${topInfo ? "pt-60 md:pt-20" : "pt-60"}`} style={{ backgroundImage: `${gradient}, url(https://image.tmdb.org/t/p/original${data.backdrop_path})` }}>
         <div className="h-full">
-          <div className=" h-full p-8 flex items-center">
+          <div className={`h-full p-8 ${topInfo && "flex flex-col"}`}>
+            {topInfo && (<div className='flex gap-3 items-center mb-28'>
+            <p className='text-3xl text-white font-lato'>{type === "movie" ? "Filmes" : "Séries"}</p>
+            <select
+          className="bg-neutral-600/90 text-white rounded-full p-0.5 border-2 border-[#FFFFFF1F]"
+        >
+          <option disabled selected hidden className="text-white">
+            Gêneros
+          </option>
+          <option className="text-white">
+            {type === "movie" ? "Animação" : "Ação"}
+          </option>
+          <option className="text-white">
+            Aventura
+          </option>
+          <option className="text-white">
+            {type === "movie" ? "Ação" : "Anime"}
+          </option>
+          <option className="text-white">
+            {type === "movie" ? "Comédia" : "Documentário"}
+          </option>
+          <option className="text-white">
+            {type === "movie" ? "Terror" : "Drama"}
+          </option>
+            </select>
+          </div>)}
             <div className="md:w-1/2 flex flex-col gap-3">
               <h1 className="text-applications-high-emphasis font-worksans text-5xl font-bold tracking-wide">
-                {data.title}
+                 {type === "movie" ? data.title: data.name}
               </h1>
               <p className="text-applications-high-emphasis font-worksans">
-                {data.release_date.slice(0, 4)}
+                {type === "movie" ? data.release_date.slice(0, 4) : data.first_air_date.slice(0, 4)}
               </p>
               <p className="text-applications-high-emphasis font-worksans text-sm">
-                {genders.length > 1 ? (genders.join(', ')) : "Não informado"}
+                {genders.length > 1 ? (genders.join(', ')) : "Gêneros não informados"}
               </p>
               <p className="text-applications-high-emphasis font-worksans text-lg">
                 {data.overview}
               </p>
-              <PageButtons />
+              <PageButtons mediaId={data.id} mediaType={data.media_type}  />
             </div>
           </div>
         </div>

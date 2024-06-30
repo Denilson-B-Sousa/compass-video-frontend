@@ -29,7 +29,10 @@ export function Stars(){
         options
       );
       const response_data = await response.json();
-      setStars(response_data.results.slice(0, 3));
+      for (let i = 0; i < 2; i++) {
+        let randomN = Math.floor(Math.random() * 20);
+        setStars(prevStars => [...prevStars, response_data.results[randomN]]);
+      }
     } catch (err) {
       console.error("Erro ao dados:", err);
     }
@@ -41,23 +44,32 @@ export function Stars(){
     handleStarSearch();
   }, []);
 
+  const getImageSource = (star: Star) => {
+
+    if (star.profile_path) {
+      return `https://image.tmdb.org/t/p/w500${star.profile_path}`;
+    }
+
+    return "../src/assets/Images/question-mark.jpg";
+  };
+
   return (
     <>
       <div className="bg-neutral-600">
-      <MainSection type="movie" />
+      <MainSection type="movie" topInfo={false}  />
       <div className="px-8 pb-8 py-14 md:p-8">
         {stars.map((star: Star) => (
           <div className="flex flex-wrap gap-3 items-center">
             <div className="flex flex-col gap-3 w-40" >
               <p className="font-worksans font-medium text-white text-center">{star.name}</p>
               <img 
-              src={`https://image.tmdb.org/t/p/w500${star.profile_path}`} 
+              src={getImageSource(star)} 
               alt={star.name}
               className="w-40 rounded-lg h-full"
               />
             </div>
             <div className="w-full">
-              <Carousel known_for={star.known_for} />
+              <Carousel text="Conhecido(a) por" type="knownFor" knownFor={star.known_for} />
             </div>
           </div>
         ))}
