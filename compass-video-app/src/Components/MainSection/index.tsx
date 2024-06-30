@@ -111,6 +111,9 @@ export function MainSection({ type, topInfo }: MainType) {
             Aventura
           </option>
           <option className="text-white">
+            {type === "movie" ? "Ação" : "Anime"}
+          </option>
+          <option className="text-white">
             {type === "movie" ? "Comédia" : "Documentário"}
           </option>
           <option className="text-white">
