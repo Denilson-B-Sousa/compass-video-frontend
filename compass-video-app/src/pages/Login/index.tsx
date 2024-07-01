@@ -43,7 +43,7 @@ export function Login() {
 
       localStorage.setItem('guestSessionId', guestSessionId);
 
-      window.location.href = `/home`
+      window.location.href = `/`
     }
     catch (error) {
       console.error('Erro ao criar sessão como convidado: ', error)
