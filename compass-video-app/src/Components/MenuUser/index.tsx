@@ -33,6 +33,12 @@ export function MenuUser() {
       setIsMenuOpen(false);
     }
   };
+
+  const handleLogOut = () => {
+    localStorage.clear();
+    navigator('/login');
+  }
+
   return (
     <div>
       <img
@@ -74,7 +80,7 @@ export function MenuUser() {
               <li className="header-item">Ajuda</li>
               <li
                 className="header-item"
-                onClick={() => navigator('/login')}
+                onClick={handleLogOut}
               >
                 Sair
               </li>

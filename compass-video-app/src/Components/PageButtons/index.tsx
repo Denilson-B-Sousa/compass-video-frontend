@@ -19,24 +19,24 @@ export function PageButtons({ mediaId, mediaType, trailer }: Media) {
   const [isOnList, setIsOnList] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const account_id = 21347274;
+  const accountId = localStorage.getItem('accountId');
 
   const handleAddToFavorites = () => {
     if (!isFavorite) {
-      Favorite(account_id, true);
+      Favorite(accountId, true);
       setIsFavorite(true);
     } else {
-      Favorite(account_id, false);
+      Favorite(accountId, false);
       setIsFavorite(false);
     }
   };
 
   const handleAddToWatchList = () => {
     if (!isOnList) {
-      WatchList(account_id, true);
+      WatchList(accountId, true);
       setIsOnList(true);
     } else{
-      WatchList(account_id, false);
+      WatchList(accountId, false);
       setIsOnList(false);
     } 
   };

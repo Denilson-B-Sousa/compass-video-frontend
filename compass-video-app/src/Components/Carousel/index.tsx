@@ -24,7 +24,7 @@ interface Media {
 export function Carousel({ text, type, mediaType, mediaId, knownFor }: CarouselProps) {
   const [media, setMedia] = useState([]);
   const VITE_API_MOVIES = import.meta.env.VITE_API_MOVIES;
-  const accountId = 21347274;
+  const accountId = localStorage.getItem('accountId');
   let apiUrl: string;
 
   switch (type) {
