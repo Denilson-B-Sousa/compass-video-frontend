@@ -1,6 +1,7 @@
 import { Carousel } from "@components/Carousel";
 import { MainSection } from "@components/MainSection";
 import { useEffect, useState } from "react";
+import unknownImage from 'assets/Images/question-mark.jpg'
 
 interface Star{
   id: number;
@@ -58,7 +59,7 @@ export function Stars(){
       return `https://image.tmdb.org/t/p/w500${star.profile_path}`;
     }
 
-    return "../src/assets/Images/question-mark.jpg";
+    return unknownImage;
   };
 
   return (

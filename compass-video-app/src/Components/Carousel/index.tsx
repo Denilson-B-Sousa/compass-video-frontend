@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import unknownImage from 'assets/Images/question-mark.jpg'
 
 interface CarouselProps {
   text: string;
@@ -32,6 +33,12 @@ export function Carousel({ text, type, mediaType, mediaId, knownFor }: CarouselP
       break;
     case "favoriteSeries":
       apiUrl = `https://api.themoviedb.org/3/account/${accountId}/favorite/tv?language=pt-BR`;
+      break;
+    case "watchlistMovies":
+      apiUrl = `https://api.themoviedb.org/3/account/${accountId}/watchlist/movies?language=pt-BR`;
+      break;
+    case "watchlistSeries":
+      apiUrl = `https://api.themoviedb.org/3/account/${accountId}/watchlist/tv?language=pt-BR`;
       break;
     case "movies":
       apiUrl = "https://api.themoviedb.org/3/trending/movie/day?language=pt-BR";
@@ -141,7 +148,7 @@ export function Carousel({ text, type, mediaType, mediaId, knownFor }: CarouselP
       return `https://image.tmdb.org/t/p/w500${media.poster_path}`;
     }
 
-    return "../src/assets/Images/question-mark.jpg";
+    return unknownImage;
   };
 
   return (

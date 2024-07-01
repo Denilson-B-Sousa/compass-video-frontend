@@ -44,7 +44,7 @@ export function MenuUser() {
 
       {isMenuOpen && (
         <div
-          className="bg-neutral-700 p-4 rounded absolute right-2"
+          className="bg-neutral-700 p-4 rounded absolute right-2 z-10"
           style={{ top: menuPosition.top }}
         >
           <div>

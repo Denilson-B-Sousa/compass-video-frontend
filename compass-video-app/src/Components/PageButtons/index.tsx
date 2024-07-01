@@ -33,8 +33,12 @@ export function PageButtons({ mediaId, mediaType, trailer }: Media) {
 
   const handleAddToWatchList = () => {
     if (!isOnList) {
+      WatchList(account_id, true);
       setIsOnList(true);
-    } else setIsOnList(false);
+    } else{
+      WatchList(account_id, false);
+      setIsOnList(false);
+    } 
   };
 
   const handleOpenPlayer = () => {  
@@ -68,6 +72,29 @@ export function PageButtons({ mediaId, mediaType, trailer }: Media) {
       console.log(data);
     } catch (err) {
       console.error("Erro ao favoritar:", err);
+    }
+  };
+
+  const WatchList = async (accountId: number, watchlist: boolean) => {
+    const options = {
+      method: "POST",
+      headers: {
+        accept: "application/json",
+        "content-type": "application/json",
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZDAxYzQwNzg2YjMxNGViYjI1ZWRjY2JiZGE0NDVmNyIsIm5iZiI6MTcxOTI1NzYzNC4wNjU0Miwic3ViIjoiNjY3OWM3MDliN2JiOGVjYmZlOGE0YmU1Iiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.OmEXRdoZEQA3u5pgE-Hg1K_XvpOXDxds1v-JjvdJiJk",
+      },
+       body: JSON.stringify({media_id: `${mediaId}`, media_type: `${mediaType}`, watchlist: {watchlist}})
+    };
+    try {
+      const response = await fetch(
+        `https://api.themoviedb.org/3/account/${accountId}/watchlist`,
+        options
+      );
+      const data = await response.json();
+      console.log(data);
+    } catch (err) {
+      console.error("Erro ao adicionar à assistir mais tarde:", err);
     }
   };
 

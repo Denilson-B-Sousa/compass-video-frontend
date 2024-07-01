@@ -15,6 +15,8 @@ export function MyLists(){
       <div className="gap-3">
         <Carousel text="Filmes Favoritos" type="favoriteMovies" mediaType="movie" />
         <Carousel text="Séries Favoritas" type="favoriteSeries" mediaType="tv" />
+        <Carousel text="Filmes para ver mais tarde" type="watchlistMovies" mediaType="movie" />
+        <Carousel text="Séries para ver mais tarde" type="watchlistSeries" mediaType="tv" />
       </div>
     </div>
     </>
