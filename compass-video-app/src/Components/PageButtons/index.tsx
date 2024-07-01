@@ -6,6 +6,7 @@ import plus from "@assets/Images/icon/plus.svg";
 import { Tooltip } from "react-tooltip";
 import { useState } from "react";
 import { Check } from "@phosphor-icons/react";
+import { Player } from "@components/Player";
 
 interface Media {
   mediaId: number;
@@ -15,6 +16,8 @@ interface Media {
 export function PageButtons({ mediaId, mediaType }: Media) {
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
   const [isOnList, setIsOnList] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
   const account_id = 21347274;
 
   const handleAddToFavorites = () => {
@@ -32,6 +35,13 @@ export function PageButtons({ mediaId, mediaType }: Media) {
       setIsOnList(true);
     } else setIsOnList(false);
   };
+
+  const handleOpenPlayer = () => {  
+    if(!isOpen) {
+      setIsOpen(true);
+    } else setIsOpen(false)
+
+  }
 
   const Favorite = async (accountId: number, favorite: boolean) => {
     const options = {
@@ -64,7 +74,7 @@ export function PageButtons({ mediaId, mediaType }: Media) {
         className="font-worksans text-neutral-600 font-semibold"
       />
 
-      <Button secondary size="primary">
+      <Button secondary size="primary" onClick={handleOpenPlayer}>
         <img src={playblack} alt="" className="mr-3" />
         Ver Agora
       </Button>
@@ -121,6 +131,8 @@ export function PageButtons({ mediaId, mediaType }: Media) {
           </Button>
         )}
       </div>
+
+      {isOpen ? <Player/> : null}
     </div>
   );
 }
