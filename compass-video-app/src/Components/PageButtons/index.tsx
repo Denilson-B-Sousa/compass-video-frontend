@@ -43,6 +43,10 @@ export function PageButtons({ mediaId, mediaType }: Media) {
 
   }
 
+  const handleMoreInfo = () => {
+    window.location.href = `/details/${mediaType}/${mediaId}`
+  }
+
   const Favorite = async (accountId: number, favorite: boolean) => {
     const options = {
       method: "POST",
@@ -78,7 +82,7 @@ export function PageButtons({ mediaId, mediaType }: Media) {
         <img src={playblack} alt="" className="mr-3" />
         Ver Agora
       </Button>
-      <Button outlined size="primary">
+      <Button outlined size="primary" onClick={handleMoreInfo}>
         <img src={info} alt="" className="mr-3" />
         Mais Informações
       </Button>
