@@ -11,6 +11,7 @@ interface CarouselProps {
   mediaType?: string;
   mediaId?: string | number;
   knownFor?: [];
+  myLists?: boolean;
 }
 
 interface Media {
@@ -22,7 +23,7 @@ interface Media {
   season_number?: number;
 }
 
-export function Carousel({ text, type, mediaType, mediaId, knownFor }: CarouselProps) {
+export function Carousel({ text, type, mediaType, mediaId, knownFor, myLists }: CarouselProps) {
   const [media, setMedia] = useState<Media[]>([]);
   const VITE_API_MOVIES = import.meta.env.VITE_API_MOVIES;
   const accountId = localStorage.getItem('accountId');
@@ -156,12 +157,82 @@ export function Carousel({ text, type, mediaType, mediaId, knownFor }: CarouselP
     return unknownImage;
   };
 
+  const removeFavorite = async (accountId: number, mediaId: number, mediaType: string) => {
+    const options = {
+      method: "POST",
+      headers: {
+        accept: "application/json",
+        "content-type": "application/json",
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZDAxYzQwNzg2YjMxNGViYjI1ZWRjY2JiZGE0NDVmNyIsIm5iZiI6MTcxOTI1NzYzNC4wNjU0Miwic3ViIjoiNjY3OWM3MDliN2JiOGVjYmZlOGE0YmU1Iiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.OmEXRdoZEQA3u5pgE-Hg1K_XvpOXDxds1v-JjvdJiJk",
+      },
+       body: JSON.stringify({media_id: `${mediaId}`, media_type: `${mediaType}`, favorite: false})
+    };
+    try {
+      const response = await fetch(
+        `https://api.themoviedb.org/3/account/${accountId}/favorite`,
+        options
+      );
+      const data = await response.json();
+      console.log(data);
+    } catch (err) {
+      console.error("Erro ao remover dos favoritos:", err);
+    }
+  };
+
+  const removeWatchList = async (accountId: number, mediaId: number, mediaType: string) => {
+    const options = {
+      method: "POST",
+      headers: {
+        accept: "application/json",
+        "content-type": "application/json",
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZDAxYzQwNzg2YjMxNGViYjI1ZWRjY2JiZGE0NDVmNyIsIm5iZiI6MTcxOTI1NzYzNC4wNjU0Miwic3ViIjoiNjY3OWM3MDliN2JiOGVjYmZlOGE0YmU1Iiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.OmEXRdoZEQA3u5pgE-Hg1K_XvpOXDxds1v-JjvdJiJk",
+      },
+       body: JSON.stringify({media_id: `${mediaId}`, media_type: `${mediaType}`, watchlist: false})
+    };
+    try {
+      const response = await fetch(
+        `https://api.themoviedb.org/3/account/${accountId}/watchlist`,
+        options
+      );
+      const data = await response.json();
+      console.log(data);
+    } catch (err) {
+      console.error("Erro remover da lista de assistir mais tarde:", err);
+    }
+  };
+
+  const handleRemoveItemFromList = (mediaId: number, mediaType: string) => {
+    if(confirm("Você tem certeza que deseja remover esse item?")){
+      if (type.includes("watchlist")) {
+         removeWatchList(accountId, mediaId, mediaType)
+      } else {
+        removeFavorite(accountId, mediaId, mediaType);
+      }
+       setMedia(media.filter((media) => media.id !== mediaId));
+    }
+  }
+
   return (
     <div className="p-4 w-full">
       <h2 className="text-white text-xl font-bold">{text}</h2>
       {media.length > 0 ? (
         <Slider {...settings}>
-          {media.map((item: Media) => (
+         { myLists ? (
+            media.map((media: Media) => (
+            <div key={media.id} className="p-2">
+              <div key={media.id} className="p-2 flex justify-center items-center group cursor-pointer" onClick={() => handleRemoveItemFromList(media.id, mediaType === "movie"  ? "movie" : "tv")}>
+                <img
+                  src={getImageSource(media)}
+                  alt={media.title || media.name}
+                  className="w-full gap-5 rounded-lg group-hover:opacity-30"
+                />
+                <p className="imageCard opacity-0 group-hover:opacity-100">Remover {media.title || media.name} de sua lista?</p>
+              </div>
+            </div>
+          ))
+          ) : (media.map((item: Media) => (
             <div key={item.id || item.season_number} className="p-2">
               {item.season_number !== undefined ? (
                 <Link to={`/details/tv/${mediaId}/season/${item.season_number}`}>
@@ -181,7 +252,7 @@ export function Carousel({ text, type, mediaType, mediaId, knownFor }: CarouselP
                 </Link>
               )}
             </div>
-          ))}
+          )))}
         </Slider>
       ) : (
         <p className="text-white font-worksans text-center">Sem informações</p>
@@ -189,3 +260,25 @@ export function Carousel({ text, type, mediaType, mediaId, knownFor }: CarouselP
     </div>
   );
 }
+
+//  {media.map((item: Media) => (
+//             <div key={item.id || item.season_number} className="p-2">
+//               {item.season_number !== undefined ? (
+//                 <Link to={`/details/tv/${mediaId}/season/${item.season_number}`}>
+//                   <img
+//                     src={getImageSource(item)}
+//                     alt={item.name || `Season ${item.season_number}`}
+//                     className="w-full gap-5 rounded-lg"
+//                   />
+//                 </Link>
+//               ) : (
+//                 <Link to={`/details/${item.media_type || mediaType}/${item.id}`}>
+//                   <img
+//                     src={getImageSource(item)}
+//                     alt={item.title || item.name}
+//                     className="w-full gap-5 rounded-lg"
+//                   />
+//                 </Link>
+//               )}
+//             </div>
+//           ))}
