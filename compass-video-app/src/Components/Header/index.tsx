@@ -9,7 +9,7 @@ import {
 import { useEffect, useState } from "react";
 import { SearchBarInput } from "@components/SearchBarInput";
 import { MenuUser } from "@components/MenuUser";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import compassLogo from 'assets/Images/logo-compass.svg'
 
 
@@ -79,21 +79,25 @@ export function Header() {
   return (
     <header className="bg-gradient-to-b from-applications-header to-transparent flex flex-wrap justify-center md:justify-between items-center px-4 py-2 absolute w-full">
       <div className="order-0 md:order-none md:hidden">
+        <Link to="/">
         <img
           src={compassLogo}
           alt="Logo Compass"
           className="block md:hidden"
         />
+        </Link>
       </div>
 
       <div className="order-2 md:order-none">
         <ul className="flex flex-wrap items-center justify-center gap-5">
           <li>
-            <img
-              src={compassLogo}
-              alt="Logo Compass"
-              className="hidden md:mr-3 md:block"
-            />
+            <Link to="/">
+        <img
+          src={compassLogo}
+          alt="Logo Compass"
+          className="hidden md:mr-3 md:block"
+        />
+        </Link>
           </li>
           <li>
             <NavLink
