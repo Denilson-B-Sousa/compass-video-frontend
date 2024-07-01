@@ -1,3 +1,4 @@
+![Badge Finalizado](http://img.shields.io/static/v1?label=STATUS&message=Finalizado&color=GREEN&style=for-the-badge)
 
 ![REACT](https://img.shields.io/badge/react-%230EA5E9.svg?style=for-the-badge&logo=react&logoColor=white)  ![VITE](https://img.shields.io/badge/vite-%239755FF.svg?style=for-the-badge&logo=vite&logoColor=white)  ![TYPESCRIPT](https://img.shields.io/badge/typescript-%230EA5E9.svg?style=for-the-badge&logo=typescript&logoColor=white) ![TAILWINDCSS](https://img.shields.io/badge/tailwindcss-%230EA5E9.svg?style=for-the-badge&logo=tailwindcss&logoColor=white)  
 
@@ -6,15 +7,30 @@
 
 ## Visão Geral
 
-O Streaming **Compass Video** é uma aplicação de streaming desenvolvida para oferecer informações detalhadas sobre filmes, séries e atores.
-O Streaming apresenta uma interface amigável, com recursos interativos para melhorar a experiência do usuário.
-
+O streaming **Compass Video** é uma aplicação desenvolvida para oferecer informações detalhadas sobre filmes, séries e atores.
+O streaming apresenta uma interface amigável, com recursos interativos para melhorar a experiência do usuário.
 
 ![hero-compass-video](https://github.com/Denilson-B-Sousa/compass-video-frontend/assets/99680537/4b329718-9ae6-4e5a-ad0c-e8df127ca778)
 
 ## Tecnologias:
 O projeto foi desenvolvido com **ReactTS + Vite e Tailwindcss**, utilizada a api [TMDB - The Movie Database](https://developer.themoviedb.org/docs/getting-started)
 e outras tecnologias modernas para proporcionar uma experiência rica e interativa aos usuários.
+
+As seguintes tecnologias foram usadas na construção do projeto:
+
+- [React](https://react.dev/)
+- [Typescript](https://www.typescriptlang.org/)
+- [Vite](https://vitejs.dev/)
+- [Tailwindcss](https://tailwindcss.com/)
+
+## Funcionalidades
+
+- [x] Login usuário
+- [x] Carousel de filmes, séries
+- [x] Player
+- [x] Listagem filmes e séries favoritos
+- [x] Adicionar e Remover da lista 
+- [x] Detalhes de séries e filmes
 
 ## Instruções de uso
 Para executar o projeto localmente, siga os seguintes passos:
