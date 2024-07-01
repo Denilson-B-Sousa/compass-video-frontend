@@ -13,10 +13,10 @@ export function MyLists(){
         Listas criadas por você de acordo com seus gostos
       </p>
       <div className="gap-3">
-        <Carousel text="Filmes Favoritos" type="favoriteMovies" mediaType="movie" />
-        <Carousel text="Séries Favoritas" type="favoriteSeries" mediaType="tv" />
-        <Carousel text="Filmes para ver mais tarde" type="watchlistMovies" mediaType="movie" />
-        <Carousel text="Séries para ver mais tarde" type="watchlistSeries" mediaType="tv" />
+        <Carousel text="Filmes Favoritos" type="favoriteMovies" mediaType="movie" myLists={true} />
+        <Carousel text="Séries Favoritas" type="favoriteSeries" mediaType="tv" myLists={true} />
+        <Carousel text="Filmes para ver mais tarde" type="watchlistMovies" mediaType="movie" myLists={true} />
+        <Carousel text="Séries para ver mais tarde" type="watchlistSeries" mediaType="tv" myLists={true} />
       </div>
     </div>
     </>
