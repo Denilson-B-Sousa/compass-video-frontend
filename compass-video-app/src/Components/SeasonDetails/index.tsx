@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import unknownImage from 'assets/Images/question-mark.jpg';
+import { Player } from '@components/Player';
 
 interface Episode {
   id: number;
@@ -23,6 +24,7 @@ interface Season {
 export function SeasonDetails() {
   const { id, seasonNumber } = useParams<{ id: string; seasonNumber: string }>();
   const [season, setSeason] = useState<Season | null>(null);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchSeasonDetails = async () => {
@@ -57,6 +59,13 @@ export function SeasonDetails() {
     return unknownImage;
   };
 
+  const handleOpenPlayer = () => {  
+    if(!isOpen) {
+      setIsOpen(true);
+    } else setIsOpen(false)
+
+  }
+
   return (
     <div className="bg-cover bg-center pt-60 px-8" style={{ backgroundImage: `url(${getImageSource(season.poster_path)})` }}>
       <div className="h-full p-8">
@@ -68,11 +77,12 @@ export function SeasonDetails() {
           <h2 className="text-white text-xl font-bold">Episódios</h2>
           <div className="flex flex-col gap-5">
             {season.episodes.map((episode: Episode) => (
-              <div key={episode.id} className="flex gap-5">
+              <div key={episode.id} className="flex gap-5 bg-neutral-600/50 p-4">
                 <img
                   src={getImageSource(episode.still_path)}
                   alt={episode.name}
-                  className="w-32 h-20 object-cover rounded-lg"
+                  className="w-32 h-20 object-cover rounded-lg cursor-pointer"
+                  onClick={handleOpenPlayer}
                 />
                 <div className="flex flex-col">
                   <h3 className="text-white text-lg font-bold">{episode.episode_number}. {episode.name}</h3>
@@ -84,6 +94,7 @@ export function SeasonDetails() {
           </div>
         </div>
       </div>
+      {isOpen ? <Player/> : null}
     </div>
   );
 }
