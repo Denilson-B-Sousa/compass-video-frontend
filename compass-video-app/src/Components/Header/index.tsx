@@ -10,6 +10,8 @@ import { useState } from "react";
 import { SearchBarInput } from "@components/SearchBarInput";
 import { MenuUser } from "@components/MenuUser";
 import { NavLink } from "react-router-dom";
+import compassLogo from 'assets/Images/logo-compass.svg'
+
 
 
 export function Header() {
@@ -28,7 +30,7 @@ export function Header() {
     <header className="bg-gradient-to-b from-applications-header to-transparent flex flex-wrap justify-center md:justify-between items-center px-4 py-2 absolute w-full">
       <div className="order-0 md:order-none md:hidden">
         <img
-          src="..\src\assets\Images\logo-compass.svg"
+          src={compassLogo}
           alt="Logo Compass"
           className="block md:hidden"
         />
@@ -38,7 +40,7 @@ export function Header() {
         <ul className="flex flex-wrap items-center justify-center gap-5">
           <li>
             <img
-              src="..\src\assets\Images\logo-compass.svg"
+              src={compassLogo}
               alt="Logo Compass"
               className="hidden md:mr-3 md:block"
             />

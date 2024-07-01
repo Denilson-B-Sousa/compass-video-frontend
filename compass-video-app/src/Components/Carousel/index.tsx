@@ -150,7 +150,6 @@ export function Carousel({ text, type, mediaType, mediaId }: CarouselProps) {
         <Slider {...settings}>
           {media.map((media: Media) => (
             <div key={media.id} className="p-2">
-              {type === "halloweenCollection" ? (
                 <Link to={`/details/${media.media_type}/${media.id}`}>
                 <img
                   src={getImageSource(media)}
@@ -158,15 +157,6 @@ export function Carousel({ text, type, mediaType, mediaId }: CarouselProps) {
                   className="w-full gap-5 rounded-lg"
                 />
               </Link>
-              ) : (
-                <Link to={`/details/${type.includes('movies') ? "movie" : "tv"}/${media.id}`}>
-                <img
-                  src={getImageSource(media)}
-                  alt={media.title || media.name}
-                  className="w-full gap-5 rounded-lg"
-                />
-              </Link>
-              )}
             </div>
           ))}
         </Slider>

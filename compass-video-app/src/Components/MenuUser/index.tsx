@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import avatarLogo from 'assets/Images/icon/avatar.svg'
+import avatarLogo2 from 'assets/Images/icon/avatar2.svg'
+import avatarLogo3 from 'assets/Images/icon/avatar3.svg'
+import createAvatarLogo from 'assets/Images/icon/createAvatar.svg'
 
 interface MenuPosition {
   top: number;
@@ -32,7 +36,7 @@ export function MenuUser() {
   return (
     <div>
       <img
-        src="..\src\assets\Images\icon\avatar.svg"
+        src={avatarLogo}
         alt="avatar-icon"
         className="header-item"
         onClick={handleOpenMenu}
@@ -46,15 +50,15 @@ export function MenuUser() {
           <div>
             <ul className="flex flex-col gap-4">
               <li className="flex gap-3 cursor-pointer">
-                <img src="..\src\assets\Images\icon\avatar2.svg" alt="" />
+                <img src={avatarLogo2} alt="" />
                 <span className="header-item text-xs">Leslie Alexander</span>
               </li>
               <li className="flex gap-3 cursor-pointer">
-                <img src="..\src\assets\Images\icon\avatar3.svg" alt="" />
+                <img src={avatarLogo3} alt="" />
                 <span className="header-item">Ronald Richards</span>
               </li>
               <li className="flex gap-3 cursor-pointer mb-5">
-                <img src="..\src\assets\Images\icon\createAvatar.svg" alt="" />
+                <img src={createAvatarLogo} alt="" />
                 <span className="header-item">Criar Perfil</span>
               </li>
             </ul>
