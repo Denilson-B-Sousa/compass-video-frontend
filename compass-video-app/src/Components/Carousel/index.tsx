@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import unknownImage from 'assets/Images/question-mark.jpg'
+import unknownImage from 'assets/Images/question-mark.jpg';
 
 interface CarouselProps {
   text: string;
@@ -15,14 +15,15 @@ interface CarouselProps {
 
 interface Media {
   id: number;
-  title: string;
-  name: string;
+  title?: string;
+  name?: string;
   poster_path: string;
-  media_type: string;
+  media_type?: string;
+  season_number?: number;
 }
 
 export function Carousel({ text, type, mediaType, mediaId, knownFor }: CarouselProps) {
-  const [media, setMedia] = useState([]);
+  const [media, setMedia] = useState<Media[]>([]);
   const VITE_API_MOVIES = import.meta.env.VITE_API_MOVIES;
   const accountId = localStorage.getItem('accountId');
   let apiUrl: string;
@@ -73,42 +74,46 @@ export function Carousel({ text, type, mediaType, mediaId, knownFor }: CarouselP
     case "similar":
       apiUrl = `https://api.themoviedb.org/3/${mediaType}/${mediaId}/similar?language=pt-BR&page=1`;
       break;
+    case "seasons":
+      apiUrl = `https://api.themoviedb.org/3/tv/${mediaId}?language=pt-BR`;
+      break;
+    default:
+      return null;
   }
 
   useEffect(() => {
-
-     if(knownFor){
+    if (knownFor) {
       setMedia(knownFor);
     } else {
-    const fetchMovies = async () => {
-      const options = {
-        method: "GET",
-        headers: {
-          accept: "application/json",
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZDAxYzQwNzg2YjMxNGViYjI1ZWRjY2JiZGE0NDVmNyIsIm5iZiI6MTcxOTUwODY5My4xMzU4MzMsInN1YiI6IjY2NzljNzA5YjdiYjhlY2JmZThhNGJlNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.98f5UpCKgwBsLq-rCwqlVrcaFUd3Kta4-8LMcPsEGac",
-        },
+      const fetchMedia = async () => {
+        const options = {
+          method: "GET",
+          headers: {
+            accept: "application/json",
+            Authorization: "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZDAxYzQwNzg2YjMxNGViYjI1ZWRjY2JiZGE0NDVmNyIsIm5iZiI6MTcxOTUwODY5My4xMzU4MzMsInN1YiI6IjY2NzljNzA5YjdiYjhlY2JmZThhNGJlNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.98f5UpCKgwBsLq-rCwqlVrcaFUd3Kta4-8LMcPsEGac",
+          },
+        };
+
+        try {
+          const response = await fetch(apiUrl, options);
+          const data = await response.json();
+          console.log(data);
+
+          if (type === "seasons") {
+            setMedia(data.seasons);
+          } else if (type === "halloweenCollection") {
+            setMedia(data.items);
+          } else {
+            setMedia(data.results);
+          }
+        } catch (err) {
+          console.error("Erro ao obter os dados:", err);
+        }
       };
 
-      try {
-        const response = await fetch(apiUrl, options);
-        const data = await response.json();
-        console.log(data)
-
-        if (type === "halloweenCollection") {
-          setMedia(data.items);
-        } 
-        else {
-          setMedia(data.results);
-        }
-      } catch (err) {
-        console.error("Erro ao obter os filmes:", err);
-      }
-    };
-
-    fetchMovies();
-     }
-  }, [VITE_API_MOVIES]);
+      fetchMedia();
+    }
+  }, [VITE_API_MOVIES, apiUrl]);
 
   const settings = {
     dots: false,
@@ -148,7 +153,6 @@ export function Carousel({ text, type, mediaType, mediaId, knownFor }: CarouselP
     if (media.poster_path) {
       return `https://image.tmdb.org/t/p/w500${media.poster_path}`;
     }
-
     return unknownImage;
   };
 
@@ -157,22 +161,24 @@ export function Carousel({ text, type, mediaType, mediaId, knownFor }: CarouselP
       <h2 className="text-white text-xl font-bold">{text}</h2>
       {media.length > 0 ? (
         <Slider {...settings}>
-          {media.map((media: Media) => (
-            <div key={media.id} className="p-2">
-                { !media.media_type ? (<Link to={`/details/${mediaType}/${media.id}`}>
-                <img
-                  src={getImageSource(media)}
-                  alt={media.title || media.name}
-                  className="w-full gap-5 rounded-lg"
-                />
-              </Link>) : (
-                <Link to={`/details/${media.media_type}/${media.id}`}>
-                <img
-                  src={getImageSource(media)}
-                  alt={media.title || media.name}
-                  className="w-full gap-5 rounded-lg"
-                />
-              </Link>
+          {media.map((item: Media) => (
+            <div key={item.id || item.season_number} className="p-2">
+              {item.season_number !== undefined ? (
+                <Link to={`/details/tv/${mediaId}/season/${item.season_number}`}>
+                  <img
+                    src={getImageSource(item)}
+                    alt={item.name || `Season ${item.season_number}`}
+                    className="w-full gap-5 rounded-lg"
+                  />
+                </Link>
+              ) : (
+                <Link to={`/details/${item.media_type || mediaType}/${item.id}`}>
+                  <img
+                    src={getImageSource(item)}
+                    alt={item.title || item.name}
+                    className="w-full gap-5 rounded-lg"
+                  />
+                </Link>
               )}
             </div>
           ))}
