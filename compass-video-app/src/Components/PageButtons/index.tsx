@@ -11,9 +11,10 @@ import { Player } from "@components/Player";
 interface Media {
   mediaId: number;
   mediaType: string;
+  trailer?: boolean;
 }
 
-export function PageButtons({ mediaId, mediaType }: Media) {
+export function PageButtons({ mediaId, mediaType, trailer }: Media) {
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
   const [isOnList, setIsOnList] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -82,10 +83,12 @@ export function PageButtons({ mediaId, mediaType }: Media) {
         <img src={playblack} alt="" className="mr-3" />
         Ver Agora
       </Button>
-      <Button outlined size="primary" onClick={handleMoreInfo}>
+      {trailer ? (<Button outlined size="primary" onClick={handleOpenPlayer}>
+        Trailer
+      </Button>) : (<Button outlined size="primary" onClick={handleMoreInfo}>
         <img src={info} alt="" className="mr-3" />
         Mais Informações
-      </Button>
+      </Button>)}
       <div className="flex gap-4 items-center">
         {!isOnList ? (
           <Button

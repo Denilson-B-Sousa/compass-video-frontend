@@ -59,7 +59,7 @@ export function MovieDetails() {
                 <p className="text-applications-high-emphasis font-worksans">{media.overview}</p>
                 <p className="text-applications-high-emphasis font-worksans text-sm">Release Date: {media.release_date || media.first_air_date}</p>
                 <p className="text-applications-high-emphasis font-worksans text-lg">Rating: {media.vote_average}</p>
-                <PageButtons mediaId={media.id} mediaType="movie" />
+                <PageButtons mediaId={media.id} mediaType="movie" trailer={true} />
             </div>         
             <div className='pt-24'>
                 <Carousel text='Similares' type='similar' mediaType={type} mediaId={id} />
