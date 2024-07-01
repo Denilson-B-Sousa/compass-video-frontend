@@ -1,8 +1,10 @@
+import compassLogo from 'assets/Images/logo-compass.svg'
+
 export function Footer() {
     return (
       <footer className="flex flex-col bg-applications-footer items-center gap-5 p-10">
         <img
-          src="..\src\assets\Images\logo-compass.svg"
+          src={compassLogo}
           alt="Logo Compass"
           className="w-60 h-auto"
         />

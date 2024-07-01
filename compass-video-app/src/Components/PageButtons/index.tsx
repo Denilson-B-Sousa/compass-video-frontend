@@ -11,29 +11,34 @@ import { Player } from "@components/Player";
 interface Media {
   mediaId: number;
   mediaType: string;
+  trailer?: boolean;
 }
 
-export function PageButtons({ mediaId, mediaType }: Media) {
+export function PageButtons({ mediaId, mediaType, trailer }: Media) {
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
   const [isOnList, setIsOnList] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const account_id = 21347274;
+  const accountId = localStorage.getItem('accountId');
 
   const handleAddToFavorites = () => {
     if (!isFavorite) {
-      Favorite(account_id, true);
+      Favorite(accountId, true);
       setIsFavorite(true);
     } else {
-      Favorite(account_id, false);
+      Favorite(accountId, false);
       setIsFavorite(false);
     }
   };
 
   const handleAddToWatchList = () => {
     if (!isOnList) {
+      WatchList(accountId, true);
       setIsOnList(true);
-    } else setIsOnList(false);
+    } else{
+      WatchList(accountId, false);
+      setIsOnList(false);
+    } 
   };
 
   const handleOpenPlayer = () => {  
@@ -41,6 +46,10 @@ export function PageButtons({ mediaId, mediaType }: Media) {
       setIsOpen(true);
     } else setIsOpen(false)
 
+  }
+
+  const handleMoreInfo = () => {
+    window.location.href = `/details/${mediaType}/${mediaId}`
   }
 
   const Favorite = async (accountId: number, favorite: boolean) => {
@@ -66,6 +75,29 @@ export function PageButtons({ mediaId, mediaType }: Media) {
     }
   };
 
+  const WatchList = async (accountId: number, watchlist: boolean) => {
+    const options = {
+      method: "POST",
+      headers: {
+        accept: "application/json",
+        "content-type": "application/json",
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZDAxYzQwNzg2YjMxNGViYjI1ZWRjY2JiZGE0NDVmNyIsIm5iZiI6MTcxOTI1NzYzNC4wNjU0Miwic3ViIjoiNjY3OWM3MDliN2JiOGVjYmZlOGE0YmU1Iiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.OmEXRdoZEQA3u5pgE-Hg1K_XvpOXDxds1v-JjvdJiJk",
+      },
+       body: JSON.stringify({media_id: `${mediaId}`, media_type: `${mediaType}`, watchlist: {watchlist}})
+    };
+    try {
+      const response = await fetch(
+        `https://api.themoviedb.org/3/account/${accountId}/watchlist`,
+        options
+      );
+      const data = await response.json();
+      console.log(data);
+    } catch (err) {
+      console.error("Erro ao adicionar à assistir mais tarde:", err);
+    }
+  };
+
   return (
     <div className="mt-5 flex flex-col md:flex-row gap-5">
       <Tooltip
@@ -78,10 +110,12 @@ export function PageButtons({ mediaId, mediaType }: Media) {
         <img src={playblack} alt="" className="mr-3" />
         Ver Agora
       </Button>
-      <Button outlined size="primary">
+      {trailer ? (<Button outlined size="primary" onClick={handleOpenPlayer}>
+        Trailer
+      </Button>) : (<Button outlined size="primary" onClick={handleMoreInfo}>
         <img src={info} alt="" className="mr-3" />
         Mais Informações
-      </Button>
+      </Button>)}
       <div className="flex gap-4 items-center">
         {!isOnList ? (
           <Button

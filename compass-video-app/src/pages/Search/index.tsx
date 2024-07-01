@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import unknownImage from 'assets/Images/question-mark.jpg'
 
 interface Data{
   id: number;
@@ -78,7 +79,7 @@ export function Search() {
       return `https://image.tmdb.org/t/p/w500${dado.profile_path}`;
     }
 
-    return "../src/assets/Images/question-mark.jpg";
+    return unknownImage;
   };
 
   return (

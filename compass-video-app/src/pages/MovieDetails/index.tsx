@@ -5,18 +5,16 @@ import { Carousel } from '@components/Carousel';
 
 interface MediaDetail {
   id: number;
-  title?: string;
-  name?: string;
+  title: string;
   poster_path: string;
   overview: string;
-  release_date?: string;
-  first_air_date?: string;
+  release_date: string;
   vote_average: number;
   backdrop_path: string;
 }
 
 export function MovieDetails() {
-  const { id, type } = useParams<{ id: string; type: string }>();
+  const { id } = useParams<{ id: string }>();
   const [media, setMedia] = useState<MediaDetail | null>(null);
 
   useEffect(() => {
@@ -30,16 +28,16 @@ export function MovieDetails() {
       };
 
       try {
-        const response = await fetch(`https://api.themoviedb.org/3/${type}/${id}?language=pt-BR`, options);
+        const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?language=pt-BR`, options);
         const data = await response.json();
         setMedia(data);
       } catch (err) {
-        console.error('Erro ao obter os detalhes da mídia:', err);
+        console.error('Erro ao obter os detalhes do filme:', err);
       }
     };
 
     fetchMediaDetails();
-  }, [id, type]);
+  }, [id]);
 
   if (!media) {
     return <div>Loading...</div>;
@@ -52,18 +50,18 @@ export function MovieDetails() {
 
   return (
     <div className={'bg-cover bg-center pt-60 px-8'} style={{ backgroundImage: `${gradient}, url(https://image.tmdb.org/t/p/original${media.backdrop_path})` }}>
-        <div className="h-full p-8">
-            <div className='md:w-1/2 flex flex-col gap-3'>
-                <h2 className="text-applications-high-emphasis font-worksans text-5xl font-bold tracking-wide">{media.title || media.name}</h2>
-                <p className="text-applications-high-emphasis font-worksans">{media.overview}</p>
-                <p className="text-applications-high-emphasis font-worksans text-sm">Release Date: {media.release_date || media.first_air_date}</p>
-                <p className="text-applications-high-emphasis font-worksans text-lg">Rating: {media.vote_average}</p>
-                <PageButtons mediaId={media.id} mediaType="movie" />
-            </div>         
-            <div>
-                <Carousel text='Semelhantes' />
-            </div>
+      <div className="h-full p-8">
+        <div className='md:w-1/2 flex flex-col gap-3'>
+          <h2 className="text-applications-high-emphasis font-worksans text-5xl font-bold tracking-wide">{media.title}</h2>
+          <p className="text-applications-high-emphasis font-worksans">{media.overview}</p>
+          <p className="text-applications-high-emphasis font-worksans text-sm">Release Date: {media.release_date}</p>
+          <p className="text-applications-high-emphasis font-worksans text-lg">Rating: {media.vote_average}</p>
+          <PageButtons mediaId={media.id} mediaType="movie" trailer={true} />
+        </div>         
+        <div className='pt-24'>
+          <Carousel text='Similares' type='similar' mediaType="movie" mediaId={id} />
         </div>
+      </div>
     </div>
   );
 }

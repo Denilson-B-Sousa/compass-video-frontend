@@ -18,10 +18,10 @@ export function Login() {
       const data = await response.json();
       const requestToken = data.request_token;
 
+      window.location.href = `${tmdbAuthUrl}${requestToken}?redirect_to=http://localhost:5173/`;
       localStorage.setItem('requestToken', requestToken);
 
       // Redirecionar para a página de autenticação
-      window.location.href = `${tmdbAuthUrl}${requestToken}?redirect_to=http://localhost:5173/`;
     } catch (error) {
       console.error('Erro ao obter request token:', error);
     }
@@ -43,7 +43,7 @@ export function Login() {
 
       localStorage.setItem('guestSessionId', guestSessionId);
 
-      window.location.href = `/home`
+      window.location.href = `/`
     }
     catch (error) {
       console.error('Erro ao criar sessão como convidado: ', error)
