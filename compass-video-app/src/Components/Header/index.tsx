@@ -42,7 +42,6 @@ export function Header() {
 
       const data = await response.json();
       const sessionId = data.session_id;
-      console.log(data)
       localStorage.setItem('sessionId', sessionId);
       setAccountId(sessionId)
 
@@ -64,7 +63,6 @@ export function Header() {
 
       const data = await response.json();
       const accountId = data.id;
-      console.log(data)
       localStorage.setItem('accountId', accountId);
 
     } catch (error) {

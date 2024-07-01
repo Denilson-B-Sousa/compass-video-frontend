@@ -93,6 +93,7 @@ export function Carousel({ text, type, mediaType, mediaId, knownFor }: CarouselP
       try {
         const response = await fetch(apiUrl, options);
         const data = await response.json();
+        console.log(data)
 
         if (type === "halloweenCollection") {
           setMedia(data.items);
