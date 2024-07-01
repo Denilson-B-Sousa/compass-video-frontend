@@ -13,6 +13,7 @@ interface MediaDetail {
   first_air_date?: string;
   vote_average: number;
   backdrop_path: string;
+
 }
 
 export function MovieDetails() {
@@ -60,8 +61,8 @@ export function MovieDetails() {
                 <p className="text-applications-high-emphasis font-worksans text-lg">Rating: {media.vote_average}</p>
                 <PageButtons mediaId={media.id} mediaType="movie" />
             </div>         
-            <div>
-                <Carousel text='Semelhantes' />
+            <div className='pt-24'>
+                <Carousel text='Similares' type='similar' mediaType={type} mediaId={id} />
             </div>
         </div>
     </div>

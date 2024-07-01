@@ -7,6 +7,9 @@ import "slick-carousel/slick/slick-theme.css";
 interface CarouselProps {
   text: string;
   type: string;
+  mediaType?: string;
+  mediaId?: string | number;
+  
 }
 
 interface Media {
@@ -17,7 +20,7 @@ interface Media {
   media_type: string;
 }
 
-export function Carousel({ text, type }: CarouselProps) {
+export function Carousel({ text, type, mediaType, mediaId }: CarouselProps) {
   const [media, setMedia] = useState([]);
   const VITE_API_MOVIES = import.meta.env.VITE_API_MOVIES;
   const accountId = 21347274;
@@ -60,6 +63,9 @@ export function Carousel({ text, type }: CarouselProps) {
     case "halloweenCollection":
       apiUrl = "https://api.themoviedb.org/3/list/8305004?language=pt-BR&page=1";
       break;
+    case "similar":
+      apiUrl = `https://api.themoviedb.org/3/${mediaType}/${mediaId}/similar?language=pt-BR&page=1`;
+      break;
     case "knownFor":
       apiUrl = "nao existe ainda";
       break;
@@ -81,8 +87,12 @@ export function Carousel({ text, type }: CarouselProps) {
         const data = await response.json();
 
         if (type === "halloweenCollection") {
+          console.log(data)
           setMedia(data.items);
-        } else setMedia(data.results);
+        } 
+        else {
+          setMedia(data.results);
+        }
       } catch (err) {
         console.error("Erro ao obter os filmes:", err);
       }
@@ -140,13 +150,23 @@ export function Carousel({ text, type }: CarouselProps) {
         <Slider {...settings}>
           {media.map((media: Media) => (
             <div key={media.id} className="p-2">
-              <Link to={`/details/${media.media_type}/${media.id}`}>
+              {type === "halloweenCollection" ? (
+                <Link to={`/details/${media.media_type}/${media.id}`}>
                 <img
                   src={getImageSource(media)}
                   alt={media.title || media.name}
                   className="w-full gap-5 rounded-lg"
                 />
               </Link>
+              ) : (
+                <Link to={`/details/${type.includes('movies') ? "movie" : "tv"}/${media.id}`}>
+                <img
+                  src={getImageSource(media)}
+                  alt={media.title || media.name}
+                  className="w-full gap-5 rounded-lg"
+                />
+              </Link>
+              )}
             </div>
           ))}
         </Slider>
