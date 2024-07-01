@@ -15,7 +15,7 @@ export function Player() {
 
     return(
       isClose ? 
-        <div className='absolute w-[98.8vw] h-[99vh] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
+        <div className='absolute w-[98.8vw] h-[99vh] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50'>
             <ReactPlayer url='https://www.youtube.com/watch?v=wmlcMkj2H70' loop width="100%" height="100%" controls playing={true} muted={true} />     
             <div className='absolute md:top-20 md:left-10 top-20 left-20'>
                 <Button outlined size='md' onClick={handleClosePlayer}> <ArrowLeft size="24px" className='mr-3'/> Close Player</Button>
