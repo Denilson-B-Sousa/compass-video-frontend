@@ -9,7 +9,7 @@ interface CarouselProps {
   type: string;
   mediaType?: string;
   mediaId?: string | number;
-  
+  knownFor?: [];
 }
 
 interface Media {
@@ -20,7 +20,7 @@ interface Media {
   media_type: string;
 }
 
-export function Carousel({ text, type, mediaType, mediaId }: CarouselProps) {
+export function Carousel({ text, type, mediaType, mediaId, knownFor }: CarouselProps) {
   const [media, setMedia] = useState([]);
   const VITE_API_MOVIES = import.meta.env.VITE_API_MOVIES;
   const accountId = 21347274;
@@ -66,12 +66,13 @@ export function Carousel({ text, type, mediaType, mediaId }: CarouselProps) {
     case "similar":
       apiUrl = `https://api.themoviedb.org/3/${mediaType}/${mediaId}/similar?language=pt-BR&page=1`;
       break;
-    case "knownFor":
-      apiUrl = "nao existe ainda";
-      break;
   }
 
   useEffect(() => {
+
+     if(knownFor){
+      setMedia(knownFor);
+    } else {
     const fetchMovies = async () => {
       const options = {
         method: "GET",
@@ -85,7 +86,6 @@ export function Carousel({ text, type, mediaType, mediaId }: CarouselProps) {
       try {
         const response = await fetch(apiUrl, options);
         const data = await response.json();
-        console.log(data)
 
         if (type === "halloweenCollection") {
           setMedia(data.items);
@@ -99,6 +99,7 @@ export function Carousel({ text, type, mediaType, mediaId }: CarouselProps) {
     };
 
     fetchMovies();
+     }
   }, [VITE_API_MOVIES]);
 
   const settings = {
@@ -144,7 +145,7 @@ export function Carousel({ text, type, mediaType, mediaId }: CarouselProps) {
   };
 
   return (
-    <div className="p-4">
+    <div className="p-4 w-full">
       <h2 className="text-white text-xl font-bold">{text}</h2>
       {media.length > 0 ? (
         <Slider {...settings}>
