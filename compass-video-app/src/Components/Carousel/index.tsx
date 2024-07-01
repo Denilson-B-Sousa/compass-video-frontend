@@ -85,9 +85,9 @@ export function Carousel({ text, type, mediaType, mediaId }: CarouselProps) {
       try {
         const response = await fetch(apiUrl, options);
         const data = await response.json();
+        console.log(data)
 
         if (type === "halloweenCollection") {
-          console.log(data)
           setMedia(data.items);
         } 
         else {
@@ -150,6 +150,13 @@ export function Carousel({ text, type, mediaType, mediaId }: CarouselProps) {
         <Slider {...settings}>
           {media.map((media: Media) => (
             <div key={media.id} className="p-2">
+                { !media.media_type ? (<Link to={`/details/${mediaType}/${media.id}`}>
+                <img
+                  src={getImageSource(media)}
+                  alt={media.title || media.name}
+                  className="w-full gap-5 rounded-lg"
+                />
+              </Link>) : (
                 <Link to={`/details/${media.media_type}/${media.id}`}>
                 <img
                   src={getImageSource(media)}
@@ -157,6 +164,7 @@ export function Carousel({ text, type, mediaType, mediaId }: CarouselProps) {
                   className="w-full gap-5 rounded-lg"
                 />
               </Link>
+              )}
             </div>
           ))}
         </Slider>
