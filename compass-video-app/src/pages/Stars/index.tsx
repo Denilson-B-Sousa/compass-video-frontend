@@ -32,7 +32,6 @@ export function Stars(){
         options
       );
       const response_data = await response.json();
-      console.log(response_data.results)
       for (let i = 0; i < 3; i++) {
         let randomN = Math.floor(Math.random() * 20);
 

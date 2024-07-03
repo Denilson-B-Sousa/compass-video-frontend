@@ -98,7 +98,6 @@ export function Carousel({ text, type, mediaType, mediaId, knownFor, myLists }: 
         try {
           const response = await fetch(apiUrl, options);
           const data = await response.json();
-          console.log(data);
 
           if (type === "seasons") {
             setMedia(data.seasons);
@@ -174,7 +173,6 @@ export function Carousel({ text, type, mediaType, mediaId, knownFor, myLists }: 
         options
       );
       const data = await response.json();
-      console.log(data);
     } catch (err) {
       console.error("Erro ao remover dos favoritos:", err);
     }
@@ -197,7 +195,6 @@ export function Carousel({ text, type, mediaType, mediaId, knownFor, myLists }: 
         options
       );
       const data = await response.json();
-      console.log(data);
     } catch (err) {
       console.error("Erro remover da lista de assistir mais tarde:", err);
     }
@@ -260,25 +257,3 @@ export function Carousel({ text, type, mediaType, mediaId, knownFor, myLists }: 
     </div>
   );
 }
-
-//  {media.map((item: Media) => (
-//             <div key={item.id || item.season_number} className="p-2">
-//               {item.season_number !== undefined ? (
-//                 <Link to={`/details/tv/${mediaId}/season/${item.season_number}`}>
-//                   <img
-//                     src={getImageSource(item)}
-//                     alt={item.name || `Season ${item.season_number}`}
-//                     className="w-full gap-5 rounded-lg"
-//                   />
-//                 </Link>
-//               ) : (
-//                 <Link to={`/details/${item.media_type || mediaType}/${item.id}`}>
-//                   <img
-//                     src={getImageSource(item)}
-//                     alt={item.title || item.name}
-//                     className="w-full gap-5 rounded-lg"
-//                   />
-//                 </Link>
-//               )}
-//             </div>
-//           ))}
