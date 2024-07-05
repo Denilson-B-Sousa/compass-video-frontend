@@ -78,8 +78,6 @@ export function Carousel({ text, type, mediaType, mediaId, knownFor, myLists }: 
     case "seasons":
       apiUrl = `https://api.themoviedb.org/3/tv/${mediaId}?language=pt-BR`;
       break;
-    default:
-      return null;
   }
 
   useEffect(() => {

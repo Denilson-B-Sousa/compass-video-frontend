@@ -14,7 +14,7 @@ export function Stars(){
 
   const [stars, setStars] = useState([])
   // Foi adicionado essa constante pois as pessoas que possuem os seguintes ID's possuem filmes adultos.
-  const forbiddenIds = [1647345, 1622390, 1708576, 2710789, 2349944, 2484644];
+  const forbiddenIds = [1647345, 1622390, 1708576, 2710789, 2349944, 2484644, 3164807, 3194176];
 
   const handleStarSearch = async () => {
 
@@ -32,15 +32,19 @@ export function Stars(){
         options
       );
       const response_data = await response.json();
-      for (let i = 0; i < 3; i++) {
-        let randomN = Math.floor(Math.random() * 20);
+      const newStars: string[] = [];
+      while (newStars.length < 2){
+        const randomN = Math.floor(Math.random() * response_data.results.length);
+        const randomStar = response_data.results[randomN];
 
-        const idToCheck = response_data.results[randomN].id; 
-
-        if (!forbiddenIds.includes(idToCheck)) {
-          setStars(prevStars => [...prevStars, response_data.results[randomN]]);
-        } 
+        if(!forbiddenIds.includes(randomStar.id)){
+            if(!newStars.some(star => star.id === randomStar.id)){
+              newStars.push(randomStar)
+            }
+        }
       }
+      console.log(newStars);
+      setStars(prevStars => [...prevStars, ...newStars]);
     } catch (err) {
       console.error("Erro ao dados:", err);
     }
